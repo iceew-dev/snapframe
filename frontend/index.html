@@ -1,0 +1,2627 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Snap Frame</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Krona+One&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --background: #1b1a1a;
+      --surface: #2b2a2a;
+      --surface-alt: #232222;
+      --input: #1c1b1b;
+      --brand: #233b79;
+      --accent: #4e74d4;
+      --like: #ff7a7a;
+      --success: #4e8a6b;
+      --font-sans: "Inter", sans-serif;
+      --font-display: "Krona One", sans-serif;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      height: 100%;
+    }
+
+    body {
+      background: var(--background);
+      color: #fff;
+      font-family: var(--font-sans);
+      min-height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    input,
+    textarea,
+    select {
+      font-family: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #3a3939;
+      border-radius: 5px;
+    }
+
+    @keyframes scroll-up {
+      from {
+        transform: translateY(0);
+      }
+
+      to {
+        transform: translateY(-50%);
+      }
+    }
+
+    @keyframes fade-in {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes pop-in {
+      from {
+        opacity: 0;
+        transform: translateY(12px) scale(0.98);
+      }
+
+      to {
+        opacity: 1;
+        transform: none;
+      }
+    }
+
+    [hidden] {
+      display: none !important;
+    }
+
+    /* ---------- demo banner ---------- */
+    .demo-banner {
+      background: var(--accent);
+      padding: 6px 16px;
+      text-align: center;
+      font-size: 12px;
+      font-weight: 500;
+      color: #fff;
+    }
+
+    /* ---------- header ---------- */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      height: 72px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      background: var(--surface);
+      padding: 0 24px;
+    }
+
+    .logo {
+      font-size: 22px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      white-space: nowrap;
+    }
+
+    .logo .accent {
+      color: var(--accent);
+    }
+
+    .main-nav {
+      display: none;
+      align-items: center;
+      gap: 22px;
+      font-family: var(--font-display);
+      font-size: 13px;
+    }
+
+    .main-nav a,
+    .main-nav button {
+      color: #fff;
+      background: none;
+      border: none;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .main-nav a.active {
+      color: var(--accent);
+    }
+
+    .main-nav .plus {
+      color: var(--accent);
+    }
+
+    .search-wrap {
+      position: relative;
+      display: none;
+      flex: 1;
+      justify-content: center;
+    }
+
+    .search-box {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border-radius: 24px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: #1f1e1e;
+      padding: 10px 18px;
+      width: 100%;
+      max-width: 480px;
+    }
+
+    .search-box input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      outline: none;
+      color: #fff;
+      font-size: 14px;
+    }
+
+    .search-box .icon {
+      color: rgba(255, 255, 255, 0.4);
+      font-size: 14px;
+    }
+
+    .search-results {
+      position: absolute;
+      top: calc(100% + 8px);
+      z-index: 30;
+      width: 100%;
+      max-width: 480px;
+      overflow: hidden;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: #262525;
+      padding: 8px;
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.5);
+      animation: pop-in 160ms ease;
+    }
+
+    .search-results .group-label {
+      padding: 8px 12px 4px;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: rgba(255, 255, 255, 0.35);
+    }
+
+    .search-results a {
+      display: block;
+      border-radius: 8px;
+      padding: 8px 12px;
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.85);
+    }
+
+    .search-results a:hover {
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .header-right {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .btn-ghost {
+      background: none;
+      border: none;
+      color: rgba(255, 255, 255, 0.85);
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .btn-signup {
+      border-radius: 16px;
+      background: var(--brand);
+      color: #fff;
+      font-family: var(--font-display);
+      font-size: 13px;
+      padding: 11px 20px;
+      border: none;
+      white-space: nowrap;
+    }
+
+    @media (min-width: 768px) {
+
+      .main-nav,
+      .search-wrap {
+        display: flex;
+      }
+    }
+
+    /* ---------- home ---------- */
+    #view-home {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    .home-copy {
+      position: relative;
+      z-index: 20;
+      max-width: 500px;
+      margin: 0 auto;
+      padding: 56px 24px 40px;
+      text-align: center;
+    }
+
+    .home-copy h1 {
+      font-family: var(--font-display);
+      font-size: 32px;
+      line-height: 1.2;
+      margin-bottom: 24px;
+    }
+
+    .home-copy p {
+      max-width: 410px;
+      margin: 0 auto 36px;
+      line-height: 1.7;
+      color: rgba(255, 255, 255, 0.82);
+    }
+
+    .home-cta {
+      display: inline-block;
+      border-radius: 16px;
+      background: var(--brand);
+      padding: 17px 32px;
+      font-family: var(--font-display);
+      font-size: 18px;
+      color: #fff;
+    }
+
+    .hero-columns {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      height: 260px;
+      gap: 12px;
+      padding: 0 24px;
+      -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 8%, #000 92%, transparent 100%);
+      mask-image: linear-gradient(to bottom, transparent 0, #000 8%, #000 92%, transparent 100%);
+    }
+
+    .hero-col {
+      flex: 1;
+      overflow: hidden;
+    }
+
+    .hero-col-inner {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .hero-tile {
+      width: 100%;
+      background-size: cover;
+      background-position: center;
+    }
+
+    @media (min-width: 768px) {
+      #view-home {
+        height: calc(100vh - 72px);
+        min-height: 640px;
+      }
+
+      .home-copy {
+        position: absolute;
+        left: 60px;
+        top: 50%;
+        transform: translateY(-50%);
+        margin: 0;
+        padding: 0;
+        text-align: left;
+      }
+
+      .home-copy h1 {
+        font-size: 48px;
+      }
+
+      .home-copy p {
+        margin: 0 0 36px;
+      }
+
+      .hero-columns {
+        position: absolute;
+        inset: 0 0 0 46%;
+        height: auto;
+        padding: 0 40px 0 0;
+        gap: 18px;
+      }
+
+      .hero-col-inner {
+        gap: 18px;
+      }
+    }
+
+    /* ---------- explore ---------- */
+    #view-explore {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 40px 24px 80px;
+      width: 100%;
+    }
+
+    .explore-head {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 26px;
+    }
+
+    .explore-head h2 {
+      font-family: var(--font-display);
+      font-size: 30px;
+      margin-bottom: 8px;
+    }
+
+    .explore-head p {
+      font-size: 15px;
+      color: rgba(255, 255, 255, 0.55);
+    }
+
+    .region-dropdown {
+      position: relative;
+    }
+
+    .region-btn {
+      display: flex;
+      min-width: 220px;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      background: var(--surface-alt);
+      padding: 12px 18px;
+      font-size: 14px;
+      font-weight: 500;
+      color: #fff;
+    }
+
+    .region-btn .dot {
+      color: var(--accent);
+    }
+
+    .region-btn .caret {
+      font-size: 11px;
+      color: rgba(255, 255, 255, 0.4);
+    }
+
+    .region-list {
+      position: absolute;
+      right: 0;
+      top: calc(100% + 8px);
+      z-index: 30;
+      max-height: 360px;
+      width: 262px;
+      overflow-y: auto;
+      border-radius: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: #262525;
+      padding: 8px;
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.5);
+      animation: pop-in 160ms ease;
+    }
+
+    .region-list a {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-radius: 9px;
+      padding: 10px 12px 10px 12px;
+      font-size: 14px;
+      color: #fff;
+      font-weight: 600;
+    }
+
+    .region-list a.city {
+      padding-left: 30px;
+      font-weight: 400;
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .region-list a.active {
+      background: rgba(78, 116, 212, 0.12);
+      color: var(--accent);
+    }
+
+    .region-list a .count {
+      font-size: 12px;
+      font-weight: 400;
+      color: rgba(255, 255, 255, 0.35);
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 34px;
+    }
+
+    .chip {
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      background: transparent;
+      padding: 9px 18px;
+      font-size: 13px;
+      font-weight: 500;
+      color: rgba(255, 255, 255, 0.75);
+      transition: all 0.2s;
+    }
+
+    .chip.active {
+      border-color: var(--brand);
+      background: var(--brand);
+      color: #fff;
+    }
+
+    .featured-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 18px;
+      margin-bottom: 40px;
+    }
+
+    .featured-card {
+      position: relative;
+      display: block;
+      aspect-ratio: 4 / 3;
+      overflow: hidden;
+      border-radius: 18px;
+      background: #000 no-repeat center/cover;
+    }
+
+    .featured-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(15, 14, 14, 0.9), rgba(15, 14, 14, 0.1) 60%, transparent);
+    }
+
+    .featured-cat {
+      position: absolute;
+      left: 16px;
+      top: 16px;
+      border-radius: 999px;
+      background: rgba(35, 59, 121, 0.85);
+      padding: 4px 12px;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    .featured-info {
+      position: absolute;
+      left: 18px;
+      right: 18px;
+      bottom: 18px;
+    }
+
+    .featured-info .title {
+      font-family: var(--font-display);
+      font-size: 18px;
+      margin-bottom: 8px;
+    }
+
+    .featured-info .who {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    @media (min-width: 768px) {
+      .featured-grid {
+        grid-template-columns: 2fr 1fr 1fr;
+        height: 360px;
+      }
+
+      .featured-card {
+        aspect-ratio: auto;
+        height: 100%;
+      }
+    }
+
+    .masonry {
+      columns: 2;
+      column-gap: 18px;
+    }
+
+    @media (min-width: 768px) {
+      .masonry {
+        columns: 4;
+      }
+    }
+
+    .masonry-card {
+      display: inline-block;
+      width: 100%;
+      margin-bottom: 18px;
+      break-inside: avoid;
+      border-radius: 16px;
+      overflow: hidden;
+      background: var(--surface-alt);
+    }
+
+    .masonry-card img {
+      display: block;
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+    }
+
+    .masonry-media {
+      position: relative;
+      display: block;
+      cursor: pointer;
+    }
+
+    .like-btn {
+      position: absolute;
+      right: 12px;
+      top: 12px;
+      display: flex;
+      height: 34px;
+      width: 34px;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      font-size: 15px;
+      background: rgba(0, 0, 0, 0.7);
+      color: #fff;
+      border: none;
+      backdrop-filter: blur(4px);
+    }
+
+    .like-btn.liked {
+      background: rgba(255, 122, 122, 0.16);
+      color: var(--like);
+    }
+
+    .media-cat {
+      position: absolute;
+      left: 12px;
+      top: 12px;
+      border-radius: 16px;
+      background: rgba(0, 0, 0, 0.7);
+      padding: 4px 10px;
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      backdrop-filter: blur(4px);
+    }
+
+    .card-owner {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px;
+    }
+
+    .avatar {
+      display: flex;
+      flex-shrink: 0;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .card-owner .avatar {
+      height: 28px;
+      width: 28px;
+      font-size: 11px;
+    }
+
+    .card-owner .who {
+      min-width: 0;
+    }
+
+    .card-owner .name {
+      font-size: 13px;
+      font-weight: 600;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .card-owner .meta {
+      font-size: 11px;
+      color: rgba(255, 255, 255, 0.45);
+    }
+
+    .empty-note {
+      padding: 60px 0;
+      text-align: center;
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.4);
+    }
+
+    /* ---------- profile ---------- */
+    #view-profile {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 48px 24px;
+      width: 100%;
+    }
+
+    .profile-head {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .profile-head .avatar {
+      height: 96px;
+      width: 96px;
+      font-size: 30px;
+    }
+
+    .profile-head h1 {
+      font-family: var(--font-display);
+      font-size: 24px;
+    }
+
+    .profile-head .meta {
+      margin: 8px 0 12px;
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    .profile-head .bio {
+      max-width: 520px;
+      margin: 0 auto 16px;
+      font-size: 14px;
+      line-height: 1.6;
+      color: rgba(255, 255, 255, 0.75);
+    }
+
+    .follow-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      justify-content: center;
+    }
+
+    .follow-row .count {
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    .btn-follow {
+      border-radius: 12px;
+      padding: 8px 20px;
+      font-size: 14px;
+      font-weight: 500;
+      border: none;
+      background: var(--brand);
+      color: #fff;
+    }
+
+    .btn-follow.following {
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #fff;
+    }
+
+    @media (min-width: 768px) {
+      .profile-head {
+        flex-direction: row;
+        align-items: flex-start;
+        text-align: left;
+      }
+
+      .profile-head .meta,
+      .profile-head .bio {
+        margin-left: 0;
+        margin-right: 0;
+      }
+
+      .follow-row {
+        justify-content: flex-start;
+      }
+    }
+
+    /* ---------- inbox ---------- */
+    #view-inbox {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 48px 24px;
+      width: 100%;
+    }
+
+    #view-inbox h1 {
+      font-family: var(--font-display);
+      font-size: 24px;
+      margin-bottom: 32px;
+    }
+
+    .inbox-empty {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 80px 24px;
+      text-align: center;
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    /* ---------- lightbox ---------- */
+    .overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0, 0, 0, 0.72);
+      padding: 20px;
+      backdrop-filter: blur(8px);
+      animation: fade-in 180ms ease;
+    }
+
+    .overlay-close {
+      position: absolute;
+      right: 20px;
+      top: 18px;
+      font-size: 20px;
+      color: rgba(255, 255, 255, 0.4);
+      background: none;
+      border: none;
+    }
+
+    .lightbox {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      max-width: 900px;
+      max-height: 88vh;
+      border-radius: 20px;
+      overflow: hidden;
+      background: var(--surface-alt);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      animation: pop-in 220ms ease;
+    }
+
+    .lightbox-media {
+      flex: 1.5;
+      min-height: 240px;
+      background: #000 no-repeat center/contain;
+    }
+
+    .lightbox-side {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      padding: 32px;
+      overflow-y: auto;
+    }
+
+    .lightbox-side .cat {
+      margin-bottom: 16px;
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      color: var(--accent);
+    }
+
+    .lightbox-side .owner {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .lightbox-side .owner .avatar {
+      height: 46px;
+      width: 46px;
+      font-size: 16px;
+    }
+
+    .lightbox-side .owner .name {
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    .lightbox-side .owner .meta {
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    .btn-like {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 26px;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      background: transparent;
+      padding: 13px;
+      font-size: 14px;
+      font-weight: 500;
+      color: #fff;
+    }
+
+    .btn-like.liked {
+      background: rgba(255, 122, 122, 0.16);
+      color: var(--like);
+      border-color: transparent;
+    }
+
+    .msg-box {
+      margin-top: auto;
+    }
+
+    .msg-box .label {
+      margin-bottom: 10px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .msg-box textarea {
+      width: 100%;
+      height: 84px;
+      resize: none;
+      border-radius: 11px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: #161515;
+      padding: 14px;
+      font-size: 14px;
+      color: #fff;
+      outline: none;
+      margin-bottom: 12px;
+    }
+
+    .btn-send {
+      width: 100%;
+      border: none;
+      border-radius: 12px;
+      background: var(--brand);
+      padding: 14px;
+      font-family: var(--font-display);
+      font-size: 13px;
+      color: #fff;
+    }
+
+    .msg-sent {
+      margin-top: 12px;
+      text-align: center;
+      font-size: 14px;
+      color: var(--success);
+    }
+
+    @media (min-width: 768px) {
+      .lightbox {
+        flex-direction: row;
+      }
+
+      .lightbox-side {
+        width: auto;
+        min-width: 300px;
+        max-width: 360px;
+        flex: none;
+      }
+    }
+
+    /* ---------- auth modal ---------- */
+    .auth-modal {
+      position: relative;
+      width: 100%;
+      max-width: 400px;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: var(--surface-alt);
+      padding: 38px 34px;
+      animation: pop-in 220ms ease;
+    }
+
+    .auth-modal .brand-title {
+      margin-bottom: 4px;
+      text-align: center;
+      font-size: 22px;
+      font-weight: 600;
+    }
+
+    .auth-modal .context {
+      margin-bottom: 26px;
+      text-align: center;
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.55);
+    }
+
+    .field {
+      width: 100%;
+      margin-bottom: 12px;
+      border-radius: 11px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: var(--input);
+      padding: 13px 15px;
+      font-size: 14px;
+      color: #fff;
+      outline: none;
+    }
+
+    .field::placeholder {
+      color: rgba(255, 255, 255, 0.35);
+    }
+
+    .auth-error {
+      margin-bottom: 12px;
+      font-size: 14px;
+      color: var(--like);
+    }
+
+    .btn-primary {
+      width: 100%;
+      margin-bottom: 14px;
+      border: none;
+      border-radius: 12px;
+      background: var(--brand);
+      padding: 15px;
+      font-family: var(--font-display);
+      font-size: 14px;
+      color: #fff;
+    }
+
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 8px 0 16px;
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.3);
+    }
+
+    .divider .line {
+      height: 1px;
+      flex: 1;
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .btn-google {
+      width: 100%;
+      margin-bottom: 22px;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      background: none;
+      padding: 14px;
+      font-size: 14px;
+      font-weight: 500;
+      color: #fff;
+    }
+
+    .auth-switch {
+      text-align: center;
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    .auth-switch .link {
+      font-weight: 500;
+      color: var(--accent);
+    }
+
+    .visually-hidden-form {
+      display: contents;
+    }
+  </style>
+</head>
+
+<body>
+
+
+  <header class="site-header">
+    <a href="#/" class="logo">Snap <span class="accent">Frame</span></a>
+    <nav class="main-nav">
+      <a href="#/" data-nav="home">Home</a>
+      <a href="#/explore" data-nav="explore">Explore</a>
+      <button type="button" data-action="publish"><span class="plus">+</span> Publicar</button>
+    </nav>
+    <div class="search-wrap" id="search-wrap">
+      <div class="search-box">
+        <span class="icon">⌕</span>
+        <input id="search-input" placeholder="Buscar criativos, fotos, projetos…" autocomplete="off">
+      </div>
+      <div id="search-results" class="search-results" hidden></div>
+    </div>
+    <div class="header-right">
+      <button type="button" class="btn-ghost" data-action="login">Entrar</button>
+      <button type="button" class="btn-signup" data-action="signup">Cadastrar</button>
+    </div>
+  </header>
+
+  <main id="view-home">
+    <div class="home-copy">
+      <h1>Transforme momentos em memórias com um clique!</h1>
+      <p>A plataforma onde você descobre fotógrafos, designers e artistas visuais perto de você — e explora um mar de
+        imagens para se inspirar.</p>
+      <a href="#/explore" class="home-cta">Explorar agora</a>
+    </div>
+    <div class="hero-columns" id="hero-columns"></div>
+  </main>
+
+  <main id="view-explore" hidden>
+    <div class="explore-head">
+      <div>
+        <h2>Explore criativos</h2>
+        <p id="explore-result-label"></p>
+      </div>
+      <div class="region-dropdown" id="region-dropdown">
+        <button type="button" class="region-btn" id="region-btn">
+          <span><span class="dot">◉</span> <span id="region-current-label"></span></span>
+          <span class="caret">▾</span>
+        </button>
+        <div class="region-list" id="region-list" hidden></div>
+      </div>
+    </div>
+
+    <div class="chips" id="category-chips"></div>
+    <div class="featured-grid" id="featured-grid"></div>
+    <div class="masonry" id="explore-feed"></div>
+  </main>
+
+  <main id="view-profile" hidden style="width: 100%; padding-bottom: 40px; color: white;">
+    <!-- Banner de Fundo (Foto de capa genérica para o MVP) -->
+    <div id="profile-banner"
+      style="height: 240px; background-image: url('https://images.unsplash.com/photo-1542038784456-1ea8e935640e?q=80&w=2000&auto=format&fit=crop'); background-size: cover; background-position: center; width: 100%; border-radius: 0 0 16px 16px;">
+    </div>
+
+    <!-- Container Centralizado -->
+    <div style="max-width: 1200px; margin: 0 auto; padding: 0 40px; position: relative; top: -60px;">
+
+      <!-- 1. Cabeçalho do Chat (AGORA DINÂMICO) -->
+      <div
+        style="display: flex; justify-content: space-between; align-items: center; padding: 15px 30px; border-bottom: 1px solid #333; background: #181818;">
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <!-- ID adicionado no avatar -->
+          <div id="chat-header-avatar" class="avatar"
+            style="background:#8b5cf6; width:40px; height:40px; font-size:16px; display:flex; align-items:center; justify-content:center; border-radius:50%; font-weight:bold;">
+            A</div>
+          <div>
+            <!-- ID adicionado no nome -->
+            <div id="chat-header-name" style="font-weight: 600; font-size: 16px;">Admin</div>
+            <div style="color: #aaa; font-size: 12px;">Membro do Snap Frame</div>
+          </div>
+        </div>
+        <button class="btn-ghost"
+          style="border: 1px solid #444; color: white; padding: 6px 16px; border-radius: 6px; font-size: 13px; cursor: pointer;">Ver
+          perfil</button>
+      </div>
+
+      <div style="display: flex; gap: 12px; padding-bottom: 15px;">
+        <button class="btn-ghost" onclick="document.getElementById('edit-profile-modal').hidden = false"
+          style="border: 1px solid #444; color: white; padding: 10px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; background: transparent;">Editar
+          Perfil</button>
+        <button class="btn-primary"
+          style="padding: 10px 24px; border-radius: 8px; background: #254b94; font-weight: 600; cursor: pointer; border: none; color: white;">Compartilhar</button>
+      </div>
+    </div>
+
+    <!-- Bio e Estatísticas -->
+    <p id="profile-bio" style="color: #ddd; max-width: 650px; font-size: 15px; line-height: 1.6; margin-bottom: 20px;">
+      Ensaios de casal,
+      família e paisagem. Luz natural sempre — de preferência no fim de tarde.</p>
+
+    <div style="display: flex; gap: 24px; margin-bottom: 30px; font-size: 15px;">
+      <div><strong id="profile-project-count" style="font-size: 16px;">0</strong> <span
+          style="color:#aaa;">projetos</span></div>
+      <div><strong style="font-size: 16px;">2180</strong> <span style="color:#aaa;">seguidores</span></div>
+      <div><strong style="font-size: 16px;">402</strong> <span style="color:#aaa;">seguindo</span></div>
+    </div>
+
+    <!-- Abas -->
+    <div style="display: flex; gap: 30px; border-bottom: 1px solid #333; margin-bottom: 25px;">
+      <span style="font-weight: 600; border-bottom: 3px solid #254b94; padding-bottom: 12px; cursor:pointer;">Portfólio
+        <span id="tab-project-count"
+          style="color:#aaa; font-weight:normal; font-size:13px; margin-left:4px;">0</span></span>
+      <span style="color: #aaa; padding-bottom: 12px; cursor:pointer;">Sobre</span>
+      <span style="color: #aaa; padding-bottom: 12px; cursor:pointer;">Curtidos <span
+          style="font-size:13px; margin-left:4px;">4</span></span>
+    </div>
+
+    <!-- Layout Duas Colunas (Grid + Sidebar) -->
+    <div style="display: flex; gap: 30px; align-items: flex-start;">
+
+      <!-- Esquerda: Portfólio -->
+      <div id="profile-works-grid"
+        style="flex-grow: 1; display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
+        <!-- Projetos injetados pelo JS -->
+      </div>
+
+      <!-- Direita: Sidebar (Cards) -->
+      <aside style="width: 320px; min-width: 320px; display: flex; flex-direction: column; gap: 20px;">
+
+        <!-- Card de Disponibilidade -->
+        <div style="background: #1c1c21; border: 1px solid #2c2c35; border-radius: 12px; padding: 20px;">
+          <div style="display: flex; align-items: center; gap: 8px; font-weight: 600; margin-bottom: 15px;">
+            <div style="width: 8px; height: 8px; background: #22c55e; border-radius: 50%;"></div>
+            Disponível para trabalhos
+          </div>
+          <p style="color: #aaa; font-size: 13px; margin: 0 0 8px 0; line-height: 1.5;">Atende em <strong
+              style="color:white;">Fortaleza, Cumbuco e Jericoacoara</strong></p>
+          <p style="color: #aaa; font-size: 13px; margin: 0 0 20px 0;">Responde em <strong style="color:white;">~1
+              h</strong></p>
+          <button class="btn-primary"
+            style="width: 100%; padding: 12px; border-radius: 8px; background: #254b94; font-weight: 600; cursor: pointer; border: none; color: white;">Solicitar
+            orçamento</button>
+        </div>
+
+        <!-- Card de Especialidades -->
+        <div id="profile-specialties" style="display: flex; flex-wrap: wrap; gap: 10px;">
+          <div style="font-weight: 600; margin-bottom: 15px;">Especialidades</div>
+          <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+            <span
+              style="background: rgba(239, 68, 68, 0.2); color: #fca5a5; padding: 6px 12px; border-radius: 6px; font-size: 13px; font-weight: 500;">💑
+              Casal</span>
+            <span
+              style="background: rgba(245, 158, 11, 0.2); color: #fcd34d; padding: 6px 12px; border-radius: 6px; font-size: 13px; font-weight: 500;">👨‍👩‍👧
+              Família</span>
+            <span
+              style="background: rgba(16, 185, 129, 0.2); color: #6ee7b7; padding: 6px 12px; border-radius: 6px; font-size: 13px; font-weight: 500;">🏞️
+              Paisagem</span>
+            <span
+              style="background: rgba(245, 158, 11, 0.2); color: #fcd34d; padding: 6px 12px; border-radius: 6px; font-size: 13px; font-weight: 500;">☀️
+              Luz natural</span>
+          </div>
+        </div>
+
+      </aside>
+    </div>
+    </div>
+  </main>
+
+  <!-- Tela de Chat (Com Menu Lateral) -->
+  <main id="view-chat" hidden style="display: flex;
+         height: calc(100vh - 70px);
+         width: 100vw;
+         color: white;">
+
+    <!-- BARRA LATERAL (Sidebar de Conversas) -->
+    <aside
+      style="width: 320px; border-right: 1px solid #333; background: #1a1a24; display: flex; flex-direction: column;">
+      <div style="padding: 20px; border-bottom: 1px solid #333; font-weight: 600; font-size: 18px;">
+        Mensagens
+      </div>
+      <div style="flex-grow: 1; overflow-y: auto;">
+
+        <!-- Contato 1 (Ativo) -->
+        <div
+          style="padding: 15px 20px; display: flex; align-items: center; gap: 12px; border-left: 4px solid #4a5ee8; background: #2a2a35; cursor: pointer;">
+          <div class="avatar"
+            style="background:#8b5cf6; width:45px; height:45px; min-width: 45px; font-size:16px; display:flex; align-items:center; justify-content:center; border-radius:50%; font-weight:bold;">
+            MA</div>
+          <div style="overflow: hidden;">
+            <div style="font-weight: 600; font-size: 15px; display: flex; justify-content: space-between;">Marina Alves
+              <span style="font-size: 11px; color: #888; font-weight: normal;">18:42</span>
+            </div>
+            <div style="color: #aaa; font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+              Perfeito! Vou te mandar os detalhes...</div>
+          </div>
+        </div>
+
+        <!-- Contato 2 (Inativo) -->
+        <div
+          style="padding: 15px 20px; display: flex; align-items: center; gap: 12px; border-left: 4px solid transparent; cursor: pointer;">
+          <div class="avatar"
+            style="background:#f59e0b; width:45px; height:45px; min-width: 45px; font-size:16px; display:flex; align-items:center; justify-content:center; border-radius:50%; font-weight:bold;">
+            JP</div>
+          <div style="overflow: hidden;">
+            <div style="font-weight: 600; font-size: 15px; display: flex; justify-content: space-between;">João Pedro
+              <span style="font-size: 11px; color: #888; font-weight: normal;">Ontem</span>
+            </div>
+            <div style="color: #aaa; font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">O
+              ensaio ficou incrível, obrigado!</div>
+          </div>
+        </div>
+
+      </div>
+    </aside>
+
+    <!-- ÁREA PRINCIPAL DO CHAT -->
+    <section style="flex-grow: 1; display: flex; flex-direction: column; background: #121212;">
+
+      <!-- 1. Cabeçalho do Chat -->
+      <div
+        style="display: flex; justify-content: space-between; align-items: center; padding: 15px 30px; border-bottom: 1px solid #333; background: #181818;">
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <div class="avatar"
+            style="background:#8b5cf6; width:40px; height:40px; font-size:16px; display:flex; align-items:center; justify-content:center; border-radius:50%; font-weight:bold;">
+            MA</div>
+          <div>
+            <div style="font-weight: 600; font-size: 16px;">Marina Alves</div>
+            <div style="color: #aaa; font-size: 12px;">Fotógrafa · Fortaleza</div>
+          </div>
+        </div>
+        <button class="btn-ghost"
+          style="border: 1px solid #444; color: white; padding: 6px 16px; border-radius: 6px; font-size: 13px; cursor: pointer;">Ver
+          perfil</button>
+      </div>
+
+      <!-- 2. Card de Contexto -->
+      <div style="display: flex; justify-content: center; margin-top: 20px;">
+        <div
+          style="display: flex; align-items: center; gap: 15px; background: #222; padding: 10px 20px; border-radius: 8px; border: 1px solid #333;">
+          <div
+            style="width: 40px; height: 40px; background-image: url('https://images.unsplash.com/photo-1506744626753-1fa44df31c78'); background-size: cover; background-position: center; border-radius: 4px;">
+          </div>
+          <div>
+            <div style="color: #aaa; font-size: 11px;">Conversa sobre o trabalho</div>
+            <div style="font-weight: 600; font-size: 14px;">Paisagem</div>
+          </div>
+          <button class="btn-ghost"
+            style="color: #4a5ee8; font-size: 13px; padding: 0 10px; cursor: pointer; border: none; background: transparent;">Ver
+            trabalho</button>
+        </div>
+      </div>
+
+      <!-- 3. Área de Rolagem das Mensagens (AGORA COM ID) -->
+      <div id="chat-messages"
+        style="flex-grow: 1; overflow-y: auto; padding: 20px 40px; display: flex; flex-direction: column; gap: 15px;">
+
+        <div style="align-self: flex-start; max-width: 70%;">
+          <div
+            style="background: #2a2a35; padding: 12px 16px; border-radius: 12px 12px 12px 0; font-size: 14px; line-height: 1.5; color: #eee;">
+            Oi Caio! Faço sim, principalmente no fim de tarde — Praia de Iracema ou Parque do Cocó.</div>
+          <div style="font-size: 10px; color: #777; margin-top: 5px;">14:09</div>
+        </div>
+
+        <div style="align-self: flex-start; max-width: 70%;">
+          <div
+            style="background: #2a2a35; padding: 12px 16px; border-radius: 12px 12px 12px 0; font-size: 14px; line-height: 1.5; color: #eee;">
+            Quer que eu te mande os pacotes e a agenda de novembro?</div>
+          <div style="font-size: 10px; color: #777; margin-top: 5px;">14:10</div>
+        </div>
+
+        <div style="align-self: flex-end; max-width: 70%;">
+          <div
+            style="background: #254b94; padding: 12px 16px; border-radius: 12px 12px 0 12px; font-size: 14px; line-height: 1.5; color: white;">
+            Olá! Gostaria de solicitar um orçamento.</div>
+          <div style="font-size: 10px; color: #777; margin-top: 5px; text-align: right;">18:39</div>
+        </div>
+
+        <div style="align-self: flex-start; max-width: 70%;">
+          <div
+            style="background: #2a2a35; padding: 12px 16px; border-radius: 12px 12px 12px 0; font-size: 14px; line-height: 1.5; color: #eee;">
+            Combinado. Qual data seria melhor pra você?</div>
+          <div style="font-size: 10px; color: #777; margin-top: 5px;">18:39</div>
+        </div>
+
+        <div style="align-self: flex-start; max-width: 70%;">
+          <div
+            style="background: #2a2a35; padding: 12px 16px; border-radius: 12px 12px 12px 0; font-size: 14px; line-height: 1.5; color: #eee;">
+            Perfeito! Vou te mandar os detalhes e valores por aqui.</div>
+          <div style="font-size: 10px; color: #777; margin-top: 5px;">18:42</div>
+        </div>
+
+      </div>
+
+      <!-- 4. Barra de Digitação (Input) (AGORA COM ID E ONCLICK NO BOTÃO) -->
+      <div
+        style="padding: 20px 40px; display: flex; gap: 15px; align-items: center; border-top: 1px solid #222; background: #181818;">
+        <button
+          style="background: transparent; border: 1px solid #444; color: #aaa; width: 42px; height: 42px; min-width: 42px; border-radius: 50%; font-size: 24px; display: flex; align-items: center; justify-content: center; cursor: pointer; padding-bottom: 4px;">+</button>
+        <input type="text" id="chat-input" placeholder="Escreva uma mensagem..."
+          style="flex-grow: 1; background: #222; border: 1px solid #333; padding: 14px 20px; border-radius: 30px; color: white; outline: none; font-size: 14px;">
+        <button class="btn-primary" onclick="enviarMensagemChat()"
+          style="padding: 12px 24px; border-radius: 30px; background: #254b94; font-weight: 600; cursor: pointer; border: none; color: white; width: auto; white-space: nowrap;">Enviar</button>
+      </div>
+
+    </section>
+  </main>
+
+
+  <main id="view-inbox" hidden>
+    <div class="inbox-empty">Faça login para ver suas mensagens.</div>
+  </main>
+
+  <!-- 1. Lightbox de Fotos -->
+  <div id="work-lightbox" class="overlay" hidden>
+    <button class="overlay-close" onclick="document.getElementById('work-lightbox').hidden = true">×</button>
+    <div class="lightbox" id="lightbox-content"></div>
+  </div>
+
+  <!-- 2. Modal de Autenticação (Que estava faltando) -->
+  <div id="auth-modal" class="overlay" hidden>
+    <div class="auth-modal">
+      <button class="overlay-close" onclick="document.getElementById('auth-modal').hidden = true"
+        style="right:20px;top:18px;">×</button>
+      <div class="brand-title">Snap <span style="color:var(--accent)">Frame</span></div>
+      <div class="context" id="auth-context"></div>
+
+      <input id="auth-name" class="field" placeholder="Nome" hidden>
+      <input id="auth-email" class="field" placeholder="E-mail" type="email">
+      <input id="auth-password" class="field" placeholder="Senha" type="password">
+
+      <div class="auth-error" id="auth-error" hidden></div>
+
+      <button type="button" class="btn-primary" id="auth-submit">Entrar</button>
+
+      <div class="divider">
+        <div class="line"></div>ou<div class="line"></div>
+      </div>
+      <button type="button" class="btn-google" data-action="auth-google">Continuar com Google</button>
+
+      <div class="auth-switch">
+        <span id="auth-switch-text">Ainda não tem conta?</span>
+        <span class="link" id="auth-switch-link" data-action="auth-switch">Cadastre-se</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. Modal de Upload (O que você criou agora) -->
+  <div id="upload-modal" class="overlay" hidden>
+    <div class="auth-modal">
+      <button class="overlay-close" onclick="document.getElementById('upload-modal').hidden = true"
+        style="right:20px;top:18px;">×</button>
+      <div class="brand-title">Publicar <span style="color:var(--accent)">Trabalho</span></div>
+      <div class="context">Mostre seu talento para o mundo</div>
+
+      <input type="file" id="upload-file" class="field" accept="image/*">
+      <input type="text" id="upload-title" class="field" placeholder="Título da obra">
+
+      <select id="upload-category" class="field">
+        <option value="Fotografia">Fotografia</option>
+        <option value="Design">Design</option>
+        <option value="Ilustração">Ilustração</option>
+        <option value="Arte">Arte</option>
+        <option value="3D">3D</option>
+        <option value="Motion">Motion</option>
+        <option value="Branding">Branding</option>
+        <option value="UI/UX">UI/UX</option>
+      </select>
+
+      <input type="text" id="upload-city" class="field" placeholder="Cidade (ex: Fortaleza)">
+      <input type="text" id="upload-state" class="field" placeholder="Estado (ex: Ceará)">
+
+      <div class="auth-error" id="upload-error" hidden></div>
+
+      <button type="button" class="btn-primary" id="upload-submit">Publicar Agora</button>
+    </div>
+  </div>
+
+  <!-- 4. Modal de Edição de Perfil (Com Upload de Arquivos) -->
+  <div id="edit-profile-modal" class="overlay" hidden>
+    <div class="auth-modal" style="max-width: 500px;">
+      <button class="overlay-close" onclick="document.getElementById('edit-profile-modal').hidden = true"
+        style="right:20px;top:18px;">×</button>
+      <div class="brand-title">Editar <span style="color:var(--accent)">Perfil</span></div>
+
+      <div style="margin-bottom: 6px; color: #aaa; font-size: 13px;">Foto de Perfil:</div>
+      <input type="file" id="edit-avatar" class="field" accept="image/*" style="padding: 10px;">
+
+      <div style="margin-bottom: 6px; color: #aaa; font-size: 13px;">Foto de Capa (Banner):</div>
+      <input type="file" id="edit-banner" class="field" accept="image/*" style="padding: 10px;">
+
+      <textarea id="edit-bio" class="field" placeholder="Sua biografia"
+        style="min-height: 80px; resize: none; font-family: inherit; margin-bottom: 15px; margin-top: 10px;"></textarea>
+
+      <div style="margin-bottom: 10px; color: #aaa; font-size: 13px;">Especialidades (separe por vírgula):</div>
+      <input type="text" id="edit-specialties" class="field" placeholder="Ex: Casal, Paisagem, Retrato">
+
+      <button type="button" id="btn-salvar-perfil" class="btn-primary" onclick="salvarEdicaoPerfil()">Salvar
+        Alterações</button>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      "use strict";
+
+      /* ============ demo data (mirrors lib/demo.ts) ============ */
+      var PEOPLE = [
+        { id: "demo-lucas", username: "lucasprado", display_name: "Lucas Prado", role_name: "Fotógrafo", city: "Fortaleza", state: "Ceará" },
+        { id: "demo-marina", username: "marinaalves", display_name: "Marina Alves", role_name: "Fotógrafa", city: "Fortaleza", state: "Ceará" },
+        { id: "demo-bea", username: "beanunes", display_name: "Bea Nunes", role_name: "Retratista", city: "Caucaia", state: "Ceará" },
+        { id: "demo-rafa", username: "rafalima", display_name: "Rafa Lima", role_name: "Designer", city: "Sobral", state: "Ceará" },
+        { id: "demo-theo", username: "theomartins", display_name: "Théo Martins", role_name: "Artista visual", city: "Salvador", state: "Bahia" },
+        { id: "demo-ivy", username: "ivycastro", display_name: "Ivy Castro", role_name: "Ilustradora", city: "Fortaleza", state: "Ceará" }
+      ];
+
+      var CATEGORIES = [
+        { id: "cat-fotografia", slug: "fotografia", name: "Fotografia" },
+        { id: "cat-design", slug: "design", name: "Design" },
+        { id: "cat-ilustracao", slug: "ilustracao", name: "Ilustração" },
+        { id: "cat-3d", slug: "3d", name: "3D" },
+        { id: "cat-motion", slug: "motion", name: "Motion" },
+        { id: "cat-branding", slug: "branding", name: "Branding" },
+        { id: "cat-uiux", slug: "ui-ux", name: "UI/UX" },
+        { id: "cat-arte", slug: "arte", name: "Arte" }
+      ];
+
+      var LOCATIONS = [
+        { state_name: "Ceará", city: "Fortaleza" },
+        { state_name: "Ceará", city: "Caucaia" },
+        { state_name: "Ceará", city: "Sobral" },
+        { state_name: "Ceará", city: "Juazeiro do Norte" },
+        { state_name: "São Paulo", city: "São Paulo" },
+        { state_name: "São Paulo", city: "Campinas" },
+        { state_name: "São Paulo", city: "Santos" },
+        { state_name: "Rio de Janeiro", city: "Rio de Janeiro" },
+        { state_name: "Rio de Janeiro", city: "Niterói" },
+        { state_name: "Minas Gerais", city: "Belo Horizonte" },
+        { state_name: "Minas Gerais", city: "Uberlândia" },
+        { state_name: "Bahia", city: "Salvador" },
+        { state_name: "Bahia", city: "Feira de Santana" },
+        { state_name: "Pernambuco", city: "Recife" },
+        { state_name: "Pernambuco", city: "Olinda" }
+      ];
+
+      var RAW_WORKS = [
+        { id: "demo-1", title: "Ensaios ao ar livre", seed: "snapframe-hero", size: "900/1200", owner: "demo-lucas", category: "Fotografia", city: "Fortaleza", state: "Ceará", daysAgo: 1, likes: 24 },
+        { id: "demo-2", title: "Momentos reais", seed: "snapframe-couple", size: "900/1200", owner: "demo-marina", category: "Fotografia", city: "Fortaleza", state: "Ceará", daysAgo: 2, likes: 31 },
+        { id: "demo-3", title: "Retrato em luz natural", seed: "snapframe-woman", size: "900/1100", owner: "demo-bea", category: "Fotografia", city: "Caucaia", state: "Ceará", daysAgo: 3, likes: 12 },
+        { id: "demo-4", title: "Identidade visual — série 01", seed: "snapframe-design-1", size: "900/700", owner: "demo-rafa", category: "Design", city: "Sobral", state: "Ceará", daysAgo: 4, likes: 18 },
+        { id: "demo-5", title: "Natureza bruta", seed: "snapframe-mountain", size: "900/1200", owner: "demo-theo", category: "Arte", city: "Salvador", state: "Bahia", daysAgo: 5, likes: 40 },
+        { id: "demo-6", title: "Ilustração editorial", seed: "snapframe-sunset", size: "900/700", owner: "demo-ivy", category: "Ilustração", city: "Fortaleza", state: "Ceará", daysAgo: 6, likes: 9 },
+        { id: "demo-7", title: "Viagem ao litoral", seed: "snapframe-beach", size: "900/1300", owner: "demo-lucas", category: "Fotografia", city: "Fortaleza", state: "Ceará", daysAgo: 7, likes: 15 },
+        { id: "demo-8", title: "Motion de marca", seed: "snapframe-design-2", size: "900/900", owner: "demo-marina", category: "Motion", city: "Fortaleza", state: "Ceará", daysAgo: 8, likes: 7 },
+        { id: "demo-9", title: "Branding para café local", seed: "snapframe-design-3", size: "900/1000", owner: "demo-rafa", category: "Branding", city: "Sobral", state: "Ceará", daysAgo: 9, likes: 21 },
+        { id: "demo-10", title: "UI de app de viagens", seed: "snapframe-design-4", size: "900/1100", owner: "demo-ivy", category: "UI/UX", city: "Fortaleza", state: "Ceará", daysAgo: 10, likes: 13 },
+        { id: "demo-11", title: "Estudo em 3D", seed: "snapframe-3d", size: "900/900", owner: "demo-bea", category: "3D", city: "Caucaia", state: "Ceará", daysAgo: 11, likes: 5 },
+        { id: "demo-12", title: "Retrato pintado", seed: "snapframe-portrait", size: "900/1200", owner: "demo-theo", category: "Arte", city: "Salvador", state: "Bahia", daysAgo: 12, likes: 27 }
+      ];
+
+      var PALETTE = ["#233B79", "#7A4EA3", "#A3574E", "#4E8A6B", "#8A7A4E", "#4E74D4"];
+      function avatarColorFor(seed) {
+        var hash = 0;
+        for (var i = 0; i < seed.length; i++) hash = (hash * 31 + seed.charCodeAt(i)) >>> 0;
+        return PALETTE[hash % PALETTE.length];
+      }
+      function initialsOf(name) {
+        return name.split(" ").filter(Boolean).slice(0, 2).map(function (p) { return p[0].toUpperCase(); }).join("");
+      }
+      function personById(id) { return PEOPLE.filter(function (p) { return p.id === id; })[0]; }
+      function categoryByName(name) { return CATEGORIES.filter(function (c) { return c.name === name; })[0]; }
+      function imageUrl(w) { return "https://picsum.photos/seed/" + w.seed + "/" + w.size; }
+
+      var WORKS = [];
+      var itensRenderizados = 0;
+      var ITENS_POR_VEZ = 12;
+
+
+      /* ============ Sistema de Paginação (Infinite Scroll) ============ */
+      function carregarMaisTrabalhos() {
+        var feed = document.getElementById("explore-feed");
+        // Se o feed não existir ou o usuário estiver em outra aba, não faz nada
+        if (!feed) return;
+
+        // Pega o próximo lote de imagens da lista
+        var proximoLote = WORKS.slice(itensRenderizados, itensRenderizados + ITENS_POR_VEZ);
+        if (proximoLote.length === 0) return;
+
+        // Desenha as fotos. Usando o mesmo estilo da aba de Perfil para manter o padrão
+        var htmlDoLote = proximoLote.map(function (w) {
+          return '<div class="work-card" style="aspect-ratio:3/4; background-image:url(' + w.image + '); background-size:cover; background-position:center; border-radius:8px; cursor:pointer;"></div>';
+        }).join("");
+
+        // Se for a primeira vez, limpa e injeta. Se for rolagem, anexa no final.
+        if (itensRenderizados === 0) {
+          feed.innerHTML = htmlDoLote;
+        } else {
+          feed.insertAdjacentHTML('beforeend', htmlDoLote);
+        }
+
+        itensRenderizados += proximoLote.length;
+      }
+
+      // O sensor: avisa o navegador para carregar mais quando chegar perto do fim da página
+      window.addEventListener("scroll", function () {
+        var distanciaDoFim = document.body.offsetHeight - (window.innerHeight + window.scrollY);
+        if (distanciaDoFim <= 300) {
+          carregarMaisTrabalhos();
+        }
+      });
+
+      async function buscarTrabalhosDoBanco() {
+        try {
+          // Busca os dados na nossa Recepcionista de Trabalhos
+          const resposta = await fetch('/api/works');
+          const trabalhosDoBanco = await resposta.json();
+
+          // Converte os dados do banco para o formato que a sua interface já usa
+          WORKS = trabalhosDoBanco.map(function (w) {
+            return {
+              id: w.id.toString(),
+              title: w.titulo,
+              image: w.imagem_url,
+              category_name: w.categoria,
+              state: w.estado,
+              city: w.cidade,
+              like_count: w.likes || 0,
+              owner_id: "user-" + w.usuario_id,
+              owner_display_name: w.owner_display_name,
+              owner_role_name: w.owner_role_name
+            };
+          });
+
+          // Pede para a tela se desenhar novamente com os dados reais
+          buildHero();
+          route();
+
+          itensRenderizados = 0;
+          var feed = document.getElementById("explore-feed");
+          if (feed) feed.innerHTML = ""; // Limpa a tela antes de injetar
+          carregarMaisTrabalhos();
+        } catch (erro) {
+          console.error("Erro ao buscar trabalhos do backend:", erro);
+        }
+      }
+
+      var DEFAULT_CITY = "Fortaleza";
+      var DEMO_NOTICE = "Login desativado no modo demonstração — dados fixos, sem backend real.";
+
+      /* ============ shared state ============ */
+      var likedIds = {}; // in-memory only — resets on reload, no backend
+
+      var explore = { category: "tudo", regionKind: "all", regionLabel: "", city: DEFAULT_CITY, state: null, q: "" };
+
+      var authGate = { mode: "login", contextText: null, pendingLabel: null };
+
+      /* ============ rendering helpers ============ */
+      function avatarEl(id, name, size) {
+        return '<div class="avatar" style="background:' + avatarColorFor(id) + ';width:' + size + 'px;height:' + size + 'px">' + initialsOf(name) + "</div>";
+      }
+
+      function ownerMeta(w) {
+        return (w.owner_role_name ? w.owner_role_name + " · " : "") + w.city;
+      }
+
+      function masonryCardHtml(w) {
+        var liked = !!likedIds[w.id];
+        return (
+          '<div class="masonry-card" data-work="' + w.id + '">' +
+          '<div class="masonry-media" data-action="open-work" data-work="' + w.id + '">' +
+          '<img src="' + w.image + '" alt="' + w.title + '" loading="lazy">' +
+          '<button type="button" class="like-btn' + (liked ? " liked" : "") + '" data-action="like" data-work="' + w.id + '">' + (liked ? "♥" : "♡") + "</button>" +
+          '<div class="media-cat">' + w.category_name + "</div>" +
+          "</div>" +
+          '<div class="card-owner">' +
+          avatarEl(w.owner_id, w.owner_display_name, 28) +
+          '<div class="who">' +
+          '<div class="name">' + w.owner_display_name + "</div>" +
+          '<div class="meta">' + ownerMeta(w) + "</div>" +
+          "</div>" +
+          "</div>" +
+          "</div>"
+        );
+      }
+
+      function featuredCardHtml(w) {
+        return (
+          '<a href="#/w/' + w.id + '" class="featured-card" data-action="open-work" data-work="' + w.id + '" style="background-image:url(' + w.image + ')">' +
+          '<div class="featured-cat">' + w.category_name + "</div>" +
+          '<div class="featured-info">' +
+          '<div class="title">' + w.title + "</div>" +
+          '<div class="who">' + avatarEl(w.owner_id, w.owner_display_name, 26) + "<span>" + w.owner_display_name + " · " + w.city + "</span></div>" +
+          "</div>" +
+          "</a>"
+        );
+      }
+
+      /* ============ header search ============ */
+      var searchInput = document.getElementById("search-input");
+      var searchResults = document.getElementById("search-results");
+
+      searchInput.addEventListener("input", function () {
+        var q = searchInput.value.trim().toLowerCase();
+        if (!q) { searchResults.hidden = true; return; }
+
+        var creatives = PEOPLE.filter(function (p) {
+          return p.display_name.toLowerCase().indexOf(q) !== -1 || p.username.toLowerCase().indexOf(q) !== -1;
+        }).slice(0, 4);
+        var works = WORKS.filter(function (w) { return w.title.toLowerCase().indexOf(q) !== -1; }).slice(0, 4);
+        var cats = CATEGORIES.filter(function (c) { return c.name.toLowerCase().indexOf(q) !== -1; }).slice(0, 4);
+
+        if (!creatives.length && !works.length && !cats.length) { searchResults.hidden = true; return; }
+
+        var html = "";
+        if (creatives.length) {
+          html += '<div class="group-label">Criativos</div>';
+          creatives.forEach(function (c) { html += '<a href="#/@' + c.username + '">' + c.display_name + "</a>"; });
+        }
+        if (works.length) {
+          html += '<div class="group-label">Projetos</div>';
+          works.forEach(function (w) { html += '<a href="#/w/' + w.id + '">' + w.title + "</a>"; });
+        }
+        if (cats.length) {
+          html += '<div class="group-label">Categorias</div>';
+          cats.forEach(function (c) { html += '<a href="#/explore?category=' + c.slug + '">' + c.name + "</a>"; });
+        }
+        searchResults.innerHTML = html;
+        searchResults.hidden = false;
+      });
+
+      document.addEventListener("mousedown", function (e) {
+        if (!document.getElementById("search-wrap").contains(e.target)) searchResults.hidden = true;
+      });
+
+      /* ============ hero carousel (home) ============ */
+      /* ============ hero carousel (home) ============ */
+      function buildHero() {
+        // Pegamos as imagens de demonstração e geramos os links delas
+        var demoWorks = RAW_WORKS.map(function (w) {
+          return { image: imageUrl(w) };
+        });
+
+        var cols = [
+          { duration: 26, ratio: "3/4" },
+          { duration: 34, ratio: "4/3" },
+          { duration: 30, ratio: "3/4" }
+        ];
+        var host = document.getElementById("hero-columns");
+        host.innerHTML = cols.map(function (col, i) {
+          // Aqui usamos o demoWorks no lugar da lista WORKS vazia
+          var colItems = demoWorks.filter(function (_, idx) { return idx % cols.length === i; });
+          var doubled = colItems.concat(colItems);
+          var tiles = doubled.map(function (w) {
+            return '<div class="hero-tile" style="aspect-ratio:' + col.ratio + ';background-image:url(' + w.image + ')"></div>';
+          }).join("");
+          return (
+            '<div class="hero-col"><div class="hero-col-inner" style="animation:scroll-up ' + col.duration + 's linear infinite;animation-delay:-' + (i * 6) + 's">' + tiles + "</div></div>"
+          );
+        }).join("");
+      }
+
+      /* ============ explore page ============ */
+      function regionCounts() {
+        var byState = {}, byCity = {};
+        WORKS.forEach(function (w) {
+          byState[w.state] = (byState[w.state] || 0) + 1;
+          byCity[w.city] = (byCity[w.city] || 0) + 1;
+        });
+        return { total: WORKS.length, byState: byState, byCity: byCity };
+      }
+
+      function statesInOrder() {
+        var order = [], index = {};
+        LOCATIONS.forEach(function (loc) {
+          if (!(loc.state_name in index)) { index[loc.state_name] = order.length; order.push({ name: loc.state_name, cities: [] }); }
+          order[index[loc.state_name]].cities.push(loc.city);
+        });
+        return order;
+      }
+
+      function filteredWorks() {
+        var items = WORKS;
+        if (explore.category !== "tudo") {
+          var catName = CATEGORIES.filter(function (c) { return c.slug === explore.category; })[0].name;
+          items = items.filter(function (w) { return w.category_name === catName; });
+        }
+        if (explore.regionKind === "city") {
+          items = items.filter(function (w) { return w.city === explore.city; });
+        } else if (explore.regionKind === "state") {
+          items = items.filter(function (w) { return w.state === explore.state; });
+        }
+        if (explore.q) {
+          var q = explore.q.toLowerCase();
+          items = items.filter(function (w) { return w.title.toLowerCase().indexOf(q) !== -1; });
+        }
+        return items;
+      }
+
+      function renderChips() {
+        var chips = [{ slug: "tudo", name: "Tudo" }].concat(CATEGORIES);
+        document.getElementById("category-chips").innerHTML = chips.map(function (c) {
+          return '<button type="button" class="chip' + (c.slug === explore.category ? " active" : "") + '" data-action="set-category" data-slug="' + c.slug + '">' + c.name + "</button>";
+        }).join("");
+      }
+
+      function renderRegionControls() {
+        var counts = regionCounts();
+        var options = [{ kind: "all", label: "Todo o Brasil", count: counts.total }];
+        statesInOrder().forEach(function (st) {
+          options.push({ kind: "state", label: st.name, count: counts.byState[st.name] || 0 });
+          st.cities.forEach(function (c) {
+            options.push({ kind: "city", label: c, count: counts.byCity[c] || 0, state: st.name });
+          });
+        });
+
+        document.getElementById("region-list").innerHTML = options.map(function (opt) {
+          var active =
+            (opt.kind === "all" && explore.regionKind === "all") ||
+            (opt.kind === "state" && explore.regionKind === "state" && explore.state === opt.label) ||
+            (opt.kind === "city" && explore.regionKind === "city" && explore.city === opt.label);
+          return (
+            '<a href="#" class="' + (opt.kind === "city" ? "city" : "") + (active ? " active" : "") + '" data-action="set-region" data-kind="' + opt.kind + '" data-label="' + opt.label + '"' + (opt.state ? ' data-state="' + opt.state + '"' : "") + ">" +
+            opt.label + '<span class="count">' + opt.count + "</span></a>"
+          );
+        }).join("");
+
+        var currentLabel = explore.regionKind === "all" ? "Todo o Brasil" : (explore.regionKind === "city" ? explore.city : explore.state);
+        document.getElementById("region-current-label").textContent = currentLabel;
+      }
+
+      function renderExploreResultLabel(total) {
+        var label;
+        if (explore.q) {
+          label = 'Resultados para "' + explore.q + '". ' + total + " resultados.";
+        } else if (explore.regionKind === "all") {
+          label = "Fotógrafos, designers e artistas de todo o Brasil. " + total + " resultados.";
+        } else if (explore.regionKind === "city") {
+          var st = statesInOrder().filter(function (s) { return s.cities.indexOf(explore.city) !== -1; })[0];
+          label = "Criativos em " + explore.city + (st ? ", " + st.name : "") + ". " + total + " resultados.";
+        } else {
+          label = "Criativos em " + explore.state + ". " + total + " resultados.";
+        }
+        document.getElementById("explore-result-label").textContent = label;
+      }
+
+      function renderExplore() {
+        renderChips();
+        renderRegionControls();
+
+        var items = filteredWorks();
+        renderExploreResultLabel(items.length);
+
+        var showFeatured = !explore.q && explore.category === "tudo" && explore.regionKind === "city" && explore.city === DEFAULT_CITY;
+        var featuredHost = document.getElementById("featured-grid");
+        if (showFeatured) {
+          var featured = items.slice().sort(function (a, b) { return b.like_count - a.like_count; }).slice(0, 3);
+          featuredHost.innerHTML = featured.map(featuredCardHtml).join("");
+          featuredHost.hidden = false;
+        } else {
+          featuredHost.innerHTML = "";
+          featuredHost.hidden = true;
+        }
+
+        var feedHost = document.getElementById("explore-feed");
+        feedHost.innerHTML = items.length
+          ? items.map(masonryCardHtml).join("")
+          : '<div class="empty-note">Nenhum trabalho encontrado.</div>';
+      }
+
+      document.getElementById("region-btn").addEventListener("click", function (e) {
+        e.stopPropagation();
+        var list = document.getElementById("region-list");
+        list.hidden = !list.hidden;
+      });
+      document.addEventListener("mousedown", function (e) {
+        var dd = document.getElementById("region-dropdown");
+        if (!dd.contains(e.target)) document.getElementById("region-list").hidden = true;
+      });
+
+      /* ============ profile page ============ */
+      function renderProfile(username) {
+        var person = PEOPLE.filter(function (p) { return p.username === username; })[0];
+        var host = document.getElementById("view-profile");
+        if (!person) {
+          host.innerHTML = '<div class="empty-note">Perfil não encontrado.</div>';
+          return;
+        }
+        var works = WORKS.filter(function (w) { return w.owner_id === person.id; });
+        var followerCount = 8 + (person.username.length * 3) % 40;
+
+        host.innerHTML =
+          '<div class="profile-head">' +
+          avatarEl(person.id, person.display_name, 96) +
+          '<div style="flex:1">' +
+          "<h1>" + person.display_name + "</h1>" +
+          '<div class="meta">' + person.role_name + " · " + person.city + "</div>" +
+          '<div class="bio">' + person.role_name + " baseado em " + person.city + ". Perfil de demonstração." + "</div>" +
+          '<div class="follow-row">' +
+          '<button type="button" class="btn-follow" data-action="follow" data-username="' + person.username + '" data-name="' + person.display_name + '">Seguir</button>' +
+          '<span class="count">' + followerCount + " seguidores</span>" +
+          "</div>" +
+          "</div>" +
+          "</div>" +
+          (works.length
+            ? '<div class="masonry">' + works.map(masonryCardHtml).join("") + "</div>"
+            : '<div class="empty-note">Nenhum trabalho publicado ainda.</div>');
+      }
+
+      /* ============ lightbox ============ */
+      function openLightbox(id) {
+        var w = WORKS.filter(function (x) { return x.id === id; })[0];
+        if (!w) return;
+        var liked = !!likedIds[w.id];
+
+        document.getElementById("lightbox-content").innerHTML =
+          '<div class="lightbox-media" style="background-image:url(' + w.image + ')"></div>' +
+          '<div class="lightbox-side">' +
+          '<div class="cat">' + w.category_name + "</div>" +
+          '<div class="owner">' +
+          avatarEl(w.owner_id, w.owner_display_name, 46) +
+          "<div><div class=\"name\">" + w.owner_display_name + '</div><div class="meta">' + ownerMeta(w) + "</div></div>" +
+          "</div>" +
+          '<button type="button" class="btn-like' + (liked ? " liked" : "") + '" data-action="like" data-work="' + w.id + '"><span>' + (liked ? "♥" : "♡") + "</span> Curtir</button>" +
+          '<div class="msg-box">' +
+          '<div class="label">Falar com ' + w.owner_display_name + "</div>" +
+          '<textarea id="lightbox-message" placeholder="Escreva uma mensagem…"></textarea>' +
+          '<button type="button" class="btn-send" data-action="send-message" data-work="' + w.id + '" data-name="' + w.owner_display_name + '">Enviar mensagem</button>' +
+          "</div>" +
+          "</div>";
+
+        document.getElementById("work-lightbox").hidden = false;
+      }
+      function closeLightbox() { document.getElementById("work-lightbox").hidden = true; }
+
+      /* ============ like toggle (always gated — no real auth in this demo) ============ */
+      function toggleLike() {
+        openAuthGate("login", "Entre para curtir este trabalho");
+      }
+
+      /* ============ sessão do usuário (Maquiagem do Login) ============ */
+      function aplicarMaquiagemDeLogin(nomeDoUsuario) {
+        var headerRight = document.querySelector(".header-right");
+        var primeiroNome = nomeDoUsuario.split(' ')[0];
+
+        headerRight.innerHTML =
+          '<div style="position:relative;">' +
+          // Gatilho maior (Avatar + Nome)
+          '<div onclick="toggleUserDropdown()" style="cursor:pointer; display:flex; align-items:center; gap:10px; user-select:none;">' +
+          '<div class="avatar" style="background:var(--brand); width:32px; height:32px; font-size:12px;">' + initialsOf(nomeDoUsuario) + '</div>' +
+          '<span style="font-weight:600; font-size:14px; color: #fff;">' + nomeDoUsuario.split(' ')[0] + '</span>' +
+          '<span style="color:#aaa; font-size:10px;">▼</span>' +
+          '</div>' +
+
+          // Menu Dropdown
+          '<div id="user-dropdown" hidden style="position:absolute; top:45px; right:0; background:#222; border:1px solid #333; border-radius:8px; padding:5px 0; min-width:130px; box-shadow:0 4px 15px rgba(0,0,0,0.5); z-index:100; flex-direction:column;">' +
+          '<button type="button" class="btn-ghost" onclick="abrirPerfil(usuarioAlvoId)" style="width:100%; text-align:left; padding:8px 15px; color:#fff; border-radius:0;">Perfil</button>' +
+          '<button type="button" class="btn-ghost" style="width:100%; text-align:left; padding:8px 15px; color:#fff; border-radius:0;">Conta</button>' +
+          '<button type="button" class="btn-ghost" onclick="sairDaConta()" style="width:100%; text-align:left; padding:8px 15px; color:#ff4444; border-radius:0;">Sair</button>' +
+          '</div>' +
+          '</div>';
+      }
+
+      window.toggleUserDropdown = function () {
+        var dropdown = document.getElementById("user-dropdown");
+        if (dropdown.hidden) {
+          dropdown.hidden = false;
+          dropdown.style.display = "flex";
+        } else {
+          dropdown.hidden = true;
+          dropdown.style.display = "none";
+        }
+      };
+
+      window.sairDaConta = function () {
+        localStorage.removeItem("snapframe_user");
+        location.reload();
+      };
+
+
+
+      // Verifica se o usuário já estava logado ao carregar a página
+      var usuarioSalvo = localStorage.getItem("snapframe_user");
+      if (usuarioSalvo) {
+        var dadosUsuario = JSON.parse(usuarioSalvo);
+        aplicarMaquiagemDeLogin(dadosUsuario.nome);
+      }
+
+      /* ============ auth gate modal ============ */
+      function openAuthGate(mode, contextText) {
+        authGate.mode = mode;
+        authGate.contextText = contextText || null;
+        applyAuthMode();
+        document.getElementById("auth-error").hidden = true;
+        document.getElementById("auth-modal").hidden = false;
+      }
+      function closeAuthGate() { document.getElementById("auth-modal").hidden = true; }
+
+      function applyAuthMode() {
+        var isSignup = authGate.mode === "signup";
+        document.getElementById("auth-name").hidden = !isSignup;
+        document.getElementById("auth-context").textContent =
+          authGate.contextText || (isSignup ? "Crie sua conta para publicar, salvar e seguir criativos" : "Entre para curtir, salvar e publicar suas imagens");
+        document.getElementById("auth-submit").textContent = isSignup ? "Criar conta" : "Entrar";
+        document.getElementById("auth-switch-text").textContent = isSignup ? "Já tem conta?" : "Ainda não tem conta?";
+        document.getElementById("auth-switch-link").textContent = isSignup ? "Entrar" : "Cadastre-se";
+      }
+
+      document.getElementById("auth-submit").addEventListener("click", async function () {
+        // 1. Pega os valores que o usuário digitou nos campos
+        var name = document.getElementById("auth-name").value.trim();
+        var email = document.getElementById("auth-email").value.trim();
+        var password = document.getElementById("auth-password").value.trim();
+        var errEl = document.getElementById("auth-error");
+
+        errEl.hidden = true; // Esconde o erro antes de tentar
+
+        // 2. Validação básica: verifica se preencheu o necessário
+        if (!email || !password || (authGate.mode === "signup" && !name)) {
+          errEl.textContent = "Por favor, preencha todos os campos obrigatórios.";
+          errEl.hidden = false;
+          return;
+        }
+
+        // 3. Define para qual URL vamos mandar os dados (Cadastro ou Login)
+        var endpoint = authGate.mode === "signup" ? "/api/auth/registrar" : "/api/auth/login";
+
+        // 4. Monta o pacotinho de dados (JSON)
+        var bodyData = authGate.mode === "signup"
+          ? { nome: name, email: email, senha: password }
+          : { email: email, senha: password };
+
+        try {
+          // 5. O carteiro (fetch) leva os dados até o backend
+          const response = await fetch(endpoint, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(bodyData)
+          });
+
+          const data = await response.json();
+
+          // 6. Verifica se o backend devolveu algum erro (ex: senha errada, email já existe)
+          if (!response.ok) {
+            errEl.textContent = data.erro || "Erro na autenticação.";
+            errEl.hidden = false;
+          } else {
+            var usuarioDoBanco = data.usuario || {};
+
+            // Monta o objeto local com TODOS os dados retornados do SQLite
+            var usuarioLogado = {
+              id: usuarioDoBanco.id || data.usuarioId,
+              nome: usuarioDoBanco.nome || name,
+              email: usuarioDoBanco.email || email,
+              avatar: usuarioDoBanco.avatar || "",
+              banner: usuarioDoBanco.banner || "",
+              bio: usuarioDoBanco.bio || "",
+              specialties: usuarioDoBanco.specialties || ""
+            };
+
+            // Salva na memória do navegador para manter os dados após fechar/recarregar
+            localStorage.setItem("snapframe_user", JSON.stringify(usuarioLogado));
+
+            aplicarMaquiagemDeLogin(usuarioLogado.nome);
+            alert(data.mensagem || "Autenticado com sucesso!");
+            closeAuthGate();
+
+            // (Opcional) Podemos salvar os dados do usuário logado depois aqui!
+          }
+        } catch (error) {
+          console.error("Erro na requisição:", error);
+          errEl.textContent = "Erro ao conectar com o servidor.";
+          errEl.hidden = false;
+        }
+      });
+
+      document.querySelector('[data-action="auth-google"]').addEventListener("click", function () {
+        var err = document.getElementById("auth-error");
+        err.textContent = DEMO_NOTICE;
+        err.hidden = false;
+      });
+      document.getElementById("auth-switch-link").addEventListener("click", function () {
+        authGate.mode = authGate.mode === "signup" ? "login" : "signup";
+        authGate.contextText = null;
+        applyAuthMode();
+      });
+
+      /* ============ Upload de Imagens ============ */
+      function fecharModalUpload() {
+        document.getElementById("upload-modal").hidden = true;
+      }
+
+      document.getElementById("upload-submit").addEventListener("click", async function () {
+        var fileInput = document.getElementById("upload-file");
+        var title = document.getElementById("upload-title").value.trim();
+        var category = document.getElementById("upload-category").value;
+        var city = document.getElementById("upload-city").value.trim();
+        var state = document.getElementById("upload-state").value.trim();
+        var errEl = document.getElementById("upload-error");
+
+        errEl.hidden = true;
+
+        // 1. Verifica se a pessoa anexou a foto e preencheu tudo
+        if (!fileInput.files[0] || !title || !city || !state) {
+          errEl.textContent = "Preencha todos os campos e escolha uma imagem.";
+          errEl.hidden = false;
+          return;
+        }
+
+        // 2. Pega o ID do usuário que nós maquiamos no localStorage
+        var usuarioLocal = JSON.parse(localStorage.getItem("snapframe_user"));
+
+        // 3. O FormData é a caixa que permite levar arquivos pela internet
+        var formData = new FormData();
+        formData.append("imagem", fileInput.files[0]); // O nome "imagem" tem que bater com o upload.single('imagem') do backend!
+        formData.append("titulo", title);
+        formData.append("categoria", category);
+        formData.append("cidade", city);
+        formData.append("estado", state);
+        formData.append("usuario_id", usuarioLocal.id);
+
+        try {
+          this.textContent = "Enviando... (otimizando imagem)"; // Muda o texto do botão
+
+          // 4. O carteiro leva o arquivo para a Recepcionista do backend
+          const response = await fetch('/api/works', {
+            method: 'POST',
+            body: formData // Nota: quando usamos FormData, NÃO colocamos 'Content-Type'. O navegador faz isso sozinho!
+          });
+
+          const data = await response.json();
+
+          if (!response.ok) {
+            errEl.textContent = data.erro || "Erro ao publicar.";
+            errEl.hidden = false;
+          } else {
+            alert("Obra publicada com sucesso!");
+            fecharModalUpload();
+
+            // Limpa os campos
+            fileInput.value = "";
+            document.getElementById("upload-title").value = "";
+
+            // Recarrega o Feed de Trabalhos instantaneamente!
+            buscarTrabalhosDoBanco();
+          }
+        } catch (error) {
+          console.error(error);
+          errEl.textContent = "Erro ao conectar com o servidor.";
+          errEl.hidden = false;
+        } finally {
+          this.textContent = "Publicar Agora"; // Volta o botão ao normal
+        }
+      });
+
+      /* ============ views / router ============ */
+      var views = ["home", "explore", "profile", "inbox", "chat"];
+      function showView(name) {
+        views.forEach(function (v) { document.getElementById("view-" + v).hidden = v !== name; });
+        document.querySelectorAll(".main-nav a[data-nav]").forEach(function (a) {
+          a.classList.toggle("active", a.getAttribute("data-nav") === name);
+        });
+      }
+
+      function parseHash() {
+        var hash = location.hash.replace(/^#\/?/, "");
+        var qIndex = hash.indexOf("?");
+        var path = qIndex === -1 ? hash : hash.slice(0, qIndex);
+        var query = {};
+        if (qIndex !== -1) {
+          hash.slice(qIndex + 1).split("&").forEach(function (pair) {
+            if (!pair) return;
+            var kv = pair.split("=");
+            query[decodeURIComponent(kv[0])] = decodeURIComponent(kv[1] || "");
+          });
+        }
+        return { path: path, query: query };
+      }
+
+      var lastNonWorkHash = "#/";
+
+      function route() {
+        var r = parseHash();
+        closeLightbox();
+
+        if (r.path.indexOf("w/") === 0) {
+          // work deep link — show as lightbox over whatever view was last active
+          openLightbox(r.path.slice(2));
+          return;
+        }
+        lastNonWorkHash = location.hash || "#/";
+
+        if (r.path.indexOf("@") === 0) {
+          showView("profile");
+          renderProfile(r.path.slice(1));
+          return;
+        }
+        if (r.path === "explore") {
+          explore.category = r.query.category || "tudo";
+          explore.q = r.query.q || "";
+          if (r.query.all === "1") {
+            explore.regionKind = "all"; explore.city = null; explore.state = null;
+          } else if (r.query.city) {
+            explore.regionKind = "city"; explore.city = r.query.city; explore.state = null;
+          } else if (r.query.state) {
+            explore.regionKind = "state"; explore.state = r.query.state; explore.city = null;
+          } else if (!explore.q) {
+            explore.regionKind = "city"; explore.city = DEFAULT_CITY; explore.state = null;
+          } else {
+            explore.regionKind = "all"; explore.city = null; explore.state = null;
+          }
+          showView("explore");
+          renderExplore();
+          return;
+        }
+        if (r.path === "inbox") { showView("inbox"); return; }
+        showView("home");
+      }
+
+      window.addEventListener("hashchange", route);
+
+      /* ============ delegated click handling ============ */
+      document.addEventListener("click", function (e) {
+        var el = e.target.closest("[data-action]");
+        if (!el) return;
+        var action = el.getAttribute("data-action");
+
+        if (action === "open-work") { e.preventDefault(); location.hash = "#/w/" + el.getAttribute("data-work"); }
+        else if (action === "close-lightbox") { location.hash = lastNonWorkHash; }
+        else if (action === "like") {
+          e.preventDefault(); e.stopPropagation();
+          toggleLike(el.getAttribute("data-work"));
+        }
+        else if (action === "send-message") {
+          // Verifica se o usuário está logado
+          if (localStorage.getItem("snapframe_user")) {
+            closeLightbox(); // Esconde a foto
+            abrirChat();     // Abre a tela de chat
+          } else {
+            var name = el.getAttribute("data-name");
+            openAuthGate("login", "Entre para falar com " + name);
+          }
+        }
+        else if (action === "follow") {
+          var fname = el.getAttribute("data-name");
+          openAuthGate("login", "Entre para seguir " + fname);
+        }
+        else if (action === "publish") {
+          // Se tiver logado, abre a janela de upload. Se não, pede pra logar.
+          if (localStorage.getItem("snapframe_user")) {
+            document.getElementById("upload-modal").hidden = false;
+          } else {
+            openAuthGate("login", "Entre para publicar seus trabalhos");
+          }
+        }
+        else if (action === "login") { openAuthGate("login", null); }
+        else if (action === "signup") { openAuthGate("signup", null); }
+        else if (action === "close-auth") { closeAuthGate(); }
+        else if (action === "set-category") {
+          e.preventDefault();
+          explore.category = el.getAttribute("data-slug");
+          renderExplore();
+        }
+        else if (action === "set-region") {
+          e.preventDefault();
+          var kind = el.getAttribute("data-kind");
+          explore.regionKind = kind;
+          if (kind === "city") { explore.city = el.getAttribute("data-label"); explore.state = null; }
+          else if (kind === "state") { explore.state = el.getAttribute("data-label"); explore.city = null; }
+          else { explore.city = null; explore.state = null; }
+          document.getElementById("region-list").hidden = true;
+          renderExplore();
+        }
+      });
+
+      document.getElementById("work-lightbox").addEventListener("click", function (e) {
+        if (e.target === this) location.hash = lastNonWorkHash;
+      });
+      document.getElementById("auth-modal").addEventListener("click", function (e) {
+        if (e.target === this) closeAuthGate();
+      });
+
+      window.abrirChat = function () {
+        // Esconde todas as abas principais
+        document.querySelectorAll('main').forEach(function (tela) { tela.hidden = true; });
+
+        // Mostra a aba de chat
+        document.getElementById('view-chat').hidden = false;
+      };
+
+      /* ============ Tela de Perfil ============ */
+      function lerArquivoComoUrl(arquivo) {
+        return new Promise(function (resolve, reject) {
+          var leitor = new FileReader();
+          leitor.onload = function () { resolve(leitor.result); };
+          leitor.onerror = function () { reject(leitor.error); };
+          leitor.readAsDataURL(arquivo);
+        });
+      }
+
+      window.salvarEdicaoPerfil = async function () {
+        var avatar = document.getElementById("edit-avatar").value.trim();
+        var banner = document.getElementById("edit-banner").value.trim();
+        var bio = document.getElementById("edit-bio").value.trim();
+        var specialties = document.getElementById("edit-specialties").value.trim();
+
+        var usuarioLocal = JSON.parse(localStorage.getItem("snapframe_user"));
+        if (!usuarioLocal) return;
+
+        try {
+          // Aponta para a URL correta /api/auth/users/
+          const response = await fetch('/api/auth/users/' + usuarioLocal.id, {
+            method: 'PUT', // <-- Obrigatório ser PUT
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ avatar, banner, bio, specialties })
+          });
+
+          if (!response.ok) {
+            alert("Erro ao salvar no servidor.");
+            return;
+          }
+
+          // Atualiza a sessão local do navegador
+          usuarioLocal.avatar = avatar;
+          usuarioLocal.banner = banner;
+          usuarioLocal.bio = bio;
+          usuarioLocal.specialties = specialties;
+          localStorage.setItem("snapframe_user", JSON.stringify(usuarioLocal));
+
+          document.getElementById("edit-profile-modal").hidden = true;
+          alert("Perfil atualizado com sucesso!");
+          abrirPerfil();
+        } catch (error) {
+          console.error("Erro na requisição:", error);
+        }
+      };
+
+      /* ============ Tela de Perfil ============ */
+      window.abrirPerfil = function () {
+        var dropdown = document.getElementById("user-dropdown");
+        if (dropdown) dropdown.hidden = true;
+
+        var usuarioLocal = JSON.parse(localStorage.getItem("snapframe_user"));
+        if (!usuarioLocal) return;
+
+        // Esconde as outras telas e mostra o perfil
+        document.querySelectorAll('main').forEach(function (tela) { tela.hidden = true; });
+        document.getElementById('view-profile').hidden = false;
+
+        // Filtra fotos do dono
+        var meusTrabalhos = WORKS.filter(function (w) {
+          return w.owner_id === "user-" + usuarioLocal.id;
+        });
+
+        document.getElementById('profile-name').textContent = usuarioLocal.nome;
+        document.getElementById('profile-project-count').textContent = meusTrabalhos.length;
+
+        var tabCount = document.getElementById('tab-project-count');
+        if (tabCount) tabCount.textContent = meusTrabalhos.length;
+
+        // Aplica Avatar
+        var avatarEl = document.getElementById('profile-avatar');
+        if (usuarioLocal.avatar) {
+          avatarEl.style.backgroundImage = 'url(' + usuarioLocal.avatar + ')';
+          avatarEl.style.backgroundSize = 'cover';
+          avatarEl.style.backgroundPosition = 'center';
+          avatarEl.textContent = '';
+        } else {
+          avatarEl.style.backgroundImage = 'none';
+          avatarEl.textContent = usuarioLocal.nome.charAt(0).toUpperCase();
+        }
+
+        // Aplica Banner
+        var bannerEl = document.getElementById('profile-banner');
+        if (bannerEl && usuarioLocal.banner) {
+          bannerEl.style.backgroundImage = 'url(' + usuarioLocal.banner + ')';
+        }
+
+        // Aplica Bio
+        var bioEl = document.getElementById('profile-bio');
+        if (bioEl && usuarioLocal.bio) bioEl.textContent = usuarioLocal.bio;
+
+        // Aplica Especialidades
+        var specEl = document.getElementById('profile-specialties');
+        if (specEl && usuarioLocal.specialties) {
+          var cores = ['#fca5a5', '#fcd34d', '#6ee7b7', '#93c5fd'];
+          var bgCores = ['rgba(239,68,68,0.2)', 'rgba(245,158,11,0.2)', 'rgba(16,185,129,0.2)', 'rgba(59,130,246,0.2)'];
+
+          specEl.innerHTML = usuarioLocal.specialties.split(',').map(function (s, i) {
+            var idx = i % cores.length;
+            return '<span style="background: ' + bgCores[idx] + '; color: ' + cores[idx] + '; padding: 6px 12px; border-radius: 6px; font-size: 13px; font-weight: 500;">' + s.trim() + '</span>';
+          }).join('');
+        }
+
+        // Desenha trabalhos
+        var grid = document.getElementById('profile-works-grid');
+        if (meusTrabalhos.length === 0) {
+          grid.innerHTML = "<p style='color:#aaa; grid-column: 1 / -1; padding: 20px 0;'>Nenhum projeto publicado ainda.</p>";
+        } else {
+          grid.innerHTML = meusTrabalhos.map(function (w) {
+            return '<div style="aspect-ratio:3/4; background-image:url(' + w.image + '); background-size:cover; background-position:center; border-radius:12px; cursor:pointer; padding: 12px; display: flex; align-items: flex-start;">' +
+              '<span style="background: rgba(0,0,0,0.65); color: white; padding: 4px 10px; border-radius: 12px; font-size: 10px; font-weight: bold; text-transform: uppercase;">' + w.category_name + '</span>' +
+              '</div>';
+          }).join("");
+        }
+      };
+
+      window.iniciarChatDaFoto = function (autorId) {
+        if (localStorage.getItem("snapframe_user")) {
+          const lightbox = document.getElementById("work-lightbox");
+          if (lightbox) lightbox.hidden = true;
+
+          // Abre o chat já direcionado para o autor do trabalho
+          abrirChat(autorId);
+        } else {
+          if (typeof openAuthGate === "function") {
+            openAuthGate("login", "Entre para enviar mensagens");
+          }
+        }
+      };
+
+      window.enviarMensagemChat = async function () {
+        const input = document.getElementById("chat-input");
+        const conteudo = input.value.trim();
+        const usuarioLocal = JSON.parse(localStorage.getItem("snapframe_user"));
+
+        if (!conteudo || !usuarioLocal || !contatoAtivoId) {
+          if (!contatoAtivoId) alert("Selecione um contato para conversar.");
+          return;
+        }
+
+        try {
+          const resposta = await fetch('/api/messages', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              remetente_id: usuarioLocal.id,
+              destinatario_id: contatoAtivoId,
+              conteudo: conteudo
+            })
+          });
+
+          if (!resposta.ok) throw new Error("Erro ao enviar");
+
+          input.value = "";
+          // Recarrega o histórico atualizado
+          await recarregarChat(contatoAtivoId);
+
+        } catch (erro) {
+          console.error("Erro ao enviar mensagem:", erro);
+          alert("Não foi possível enviar a mensagem.");
+        }
+      };
+
+      // ==========================================
+      // CONTROLE DE ESTADO DO CHAT (DEFINITIVO)
+      // ==========================================
+      let contatoAtivoId = null;
+      let contatoAtivoNome = "Contato";
+      let todasAsMensagens = [];
+
+      window.abrirChat = async function (destinatarioId = null, destinatarioNome = null) {
+        const usuarioLocal = JSON.parse(localStorage.getItem("snapframe_user"));
+        if (!usuarioLocal) {
+          if (typeof openAuthGate === "function") openAuthGate("login", "Entre para acessar o chat");
+          return;
+        }
+
+        document.querySelectorAll('main').forEach(m => m.hidden = true);
+        document.getElementById('view-chat').hidden = false;
+
+        await carregarHistoricoEContatos(usuarioLocal.id, destinatarioId, destinatarioNome);
+      };
+
+      async function carregarHistoricoEContatos(usuarioId, destinatarioInicialId, destinatarioNome) {
+        try {
+          const res = await fetch('/api/messages/' + usuarioId);
+          todasAsMensagens = await res.json();
+
+          const contatosMap = new Map();
+
+          // Mapeia históricos reais
+          todasAsMensagens.forEach(m => {
+            const eRemetente = m.remetente_id === usuarioId;
+            const outroId = eRemetente ? m.destinatario_id : m.remetente_id;
+            const outroNome = eRemetente ? m.destinatario_nome : m.remetente_nome;
+
+            contatosMap.set(outroId, {
+              id: outroId,
+              nome: outroNome || "Usuário",
+              ultimaMensagem: m.conteudo
+            });
+          });
+
+          // Se iniciou chat com alguém novo, adiciona na lista
+          if (destinatarioInicialId && destinatarioInicialId !== usuarioId && !contatosMap.has(destinatarioInicialId)) {
+            contatosMap.set(destinatarioInicialId, {
+              id: destinatarioInicialId,
+              nome: destinatarioNome || "Contato",
+              ultimaMensagem: "Inicie a conversa..."
+            });
+          }
+
+          const contatos = Array.from(contatosMap.values());
+          const proximoAtivo = destinatarioInicialId || (contatos.length > 0 ? contatos[0].id : null);
+          const proximoNome = destinatarioNome || (contatos.length > 0 ? contatos[0].nome : "Contato");
+
+          renderizarBarraLateral(contatos, usuarioId, proximoAtivo);
+
+          if (proximoAtivo) {
+            selecionarContato(proximoAtivo, proximoNome);
+          } else {
+            contatoAtivoId = null;
+            document.getElementById("chat-messages").innerHTML = "<p style='color:#aaa; text-align:center; padding:20px;'>Nenhuma conversa iniciada.</p>";
+            document.getElementById("chat-header-name").textContent = "Nenhuma Conversa";
+            document.getElementById("chat-header-avatar").textContent = "-";
+          }
+
+        } catch (err) {
+          console.error("Erro ao carregar mensagens:", err);
+        }
+      }
+
+      function renderizarBarraLateral(contatos, meuId, ativoId) {
+        const container = document.querySelector("#view-chat aside > div:nth-child(2)");
+        if (!container) return;
+
+        if (contatos.length === 0) {
+          container.innerHTML = "<p style='color:#888; padding:15px; font-size:13px;'>Nenhuma conversa</p>";
+          return;
+        }
+
+        container.innerHTML = contatos.map(c => `
+    <div onclick="selecionarContato(${c.id}, '${c.nome}')" 
+         style="padding: 15px 20px; display: flex; align-items: center; gap: 12px; border-left: 4px solid ${ativoId === c.id ? '#4a5ee8' : 'transparent'}; background: ${ativoId === c.id ? '#2a2a35' : 'transparent'}; cursor: pointer;">
+      <div class="avatar" style="background:#8b5cf6; width:45px; height:45px; min-width:45px; font-size:16px; display:flex; align-items:center; justify-content:center; border-radius:50%; font-weight:bold;">
+        ${c.nome ? c.nome.charAt(0).toUpperCase() : 'U'}
+      </div>
+      <div style="overflow: hidden; flex-grow:1;">
+        <div style="font-weight: 600; font-size: 15px;">${c.nome}</div>
+        <div style="color: #aaa; font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+          ${c.ultimaMensagem || ''}
+        </div>
+      </div>
+    </div>
+  `).join("");
+      }
+
+      // ESTA FUNÇÃO ALTERA O NOME LÁ EM CIMA E PREVINE SOBREPOSIÇÃO
+      window.selecionarContato = function (contatoId, contatoNome) {
+        contatoAtivoId = contatoId;
+        contatoAtivoNome = contatoNome || "Usuário";
+        const usuarioLocal = JSON.parse(localStorage.getItem("snapframe_user"));
+
+        // Atualiza visualmente o Cabeçalho (Header) do Chat
+        const headerNameEl = document.getElementById("chat-header-name");
+        const headerAvatarEl = document.getElementById("chat-header-avatar");
+        if (headerNameEl) headerNameEl.textContent = contatoAtivoNome;
+        if (headerAvatarEl) headerAvatarEl.textContent = contatoAtivoNome.charAt(0).toUpperCase();
+
+        // Atualiza as bordas da barra lateral
+        const contatosMap = new Map();
+        todasAsMensagens.forEach(m => {
+          const eRemetente = m.remetente_id === usuarioLocal.id;
+          const outroId = eRemetente ? m.destinatario_id : m.remetente_id;
+          const outroNome = eRemetente ? m.destinatario_nome : m.remetente_nome;
+          contatosMap.set(outroId, { id: outroId, nome: outroNome, ultimaMensagem: m.conteudo });
+        });
+
+        if (contatoId && !contatosMap.has(contatoId)) {
+          contatosMap.set(contatoId, { id: contatoId, nome: contatoNome, ultimaMensagem: "Inicie a conversa..." });
+        }
+
+        renderizarBarraLateral(Array.from(contatosMap.values()), usuarioLocal.id, contatoId);
+        recarregarChat(contatoId);
+      };
+
+      async function recarregarChat(contatoId) {
+        const usuarioLocal = JSON.parse(localStorage.getItem("snapframe_user"));
+        const containerMsgs = document.getElementById("chat-messages");
+        if (!containerMsgs) return;
+
+        // Limpa o chat atual para não sobrepor
+        containerMsgs.innerHTML = "";
+
+        try {
+          const res = await fetch('/api/messages/' + usuarioLocal.id);
+          todasAsMensagens = await res.json();
+        } catch (e) { }
+
+        const msgsContato = todasAsMensagens.filter(
+          m => (m.remetente_id === usuarioLocal.id && m.destinatario_id === contatoId) ||
+            (m.remetente_id === contatoId && m.destinatario_id === usuarioLocal.id)
+        );
+
+        if (msgsContato.length === 0) {
+          containerMsgs.innerHTML = "<p style='color:#777; text-align:center; margin-top:20px;'>Inicie a conversa enviando uma mensagem abaixo.</p>";
+          return;
+        }
+
+        containerMsgs.innerHTML = msgsContato.map(m => {
+          const eMeu = m.remetente_id === usuarioLocal.id;
+          const hora = m.data_envio ? new Date(m.data_envio).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : "Agora";
+
+          return `
+      <div style="align-self: ${eMeu ? 'flex-end' : 'flex-start'}; max-width: 70%;">
+        <div style="background: ${eMeu ? '#254b94' : '#2a2a35'}; padding: 12px 16px; border-radius: ${eMeu ? '12px 12px 0 12px' : '12px 12px 12px 0'}; font-size: 14px; line-height: 1.5; color: white;">
+          ${m.conteudo}
+        </div>
+        <div style="font-size: 10px; color: #777; margin-top: 5px; text-align: ${eMeu ? 'right' : 'left'};">${hora}</div>
+      </div>
+    `;
+        }).join("");
+
+        containerMsgs.scrollTop = containerMsgs.scrollHeight;
+      }
+
+      window.enviarMensagemChat = async function () {
+        const input = document.getElementById("chat-input");
+        const conteudo = input.value.trim();
+        const usuarioLocal = JSON.parse(localStorage.getItem("snapframe_user"));
+
+        if (!conteudo || !usuarioLocal || !contatoAtivoId) return;
+
+        const containerMsgs = document.getElementById("chat-messages");
+        if (containerMsgs.innerHTML.includes("Inicie a conversa")) containerMsgs.innerHTML = "";
+
+        const horaAtual = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        const balaoHtml = `
+    <div style="align-self: flex-end; max-width: 70%; margin-top: 15px;">
+      <div style="background: #254b94; padding: 12px 16px; border-radius: 12px 12px 0 12px; font-size: 14px; line-height: 1.5; color: white;">
+        ${conteudo}
+      </div>
+      <div style="font-size: 10px; color: #777; margin-top: 5px; text-align: right;">${horaAtual}</div>
+    </div>
+  `;
+        containerMsgs.insertAdjacentHTML('beforeend', balaoHtml);
+        containerMsgs.scrollTop = containerMsgs.scrollHeight;
+        input.value = "";
+
+        try {
+          await fetch('/api/messages', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              remetente_id: usuarioLocal.id,
+              destinatario_id: contatoAtivoId,
+              conteudo: conteudo
+            })
+          });
+          carregarHistoricoEContatos(usuarioLocal.id, contatoAtivoId, contatoAtivoNome);
+        } catch (erro) { }
+      };
+
+      const chatInputEl = document.getElementById("chat-input");
+      if (chatInputEl) {
+        chatInputEl.addEventListener("keypress", function (e) {
+          if (e.key === "Enter") enviarMensagemChat();
+        });
+      }
+
+      // Permite enviar apertando a tecla "Enter"
+      document.getElementById("chat-input").addEventListener("keypress", function (e) {
+        if (e.key === "Enter") {
+          enviarMensagemChat();
+        }
+      });
+
+      /* ============ init ============ */
+      buscarTrabalhosDoBanco();
+      if (!location.hash) showView("home");
+    })();
+  </script>
+</body>
+
+</html>
