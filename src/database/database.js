@@ -32,14 +32,14 @@ function criarTabelas() {
         specialties TEXT
     )
 `, () => {
-    // Garante a criação das colunas caso o arquivo .sqlite antigo persista
-    const colunas = ['avatar', 'banner', 'bio', 'specialties'];
-    colunas.forEach(coluna => {
-        db.run(`ALTER TABLE usuarios ADD COLUMN ${coluna} TEXT`, () => {
-            // Ignora erro se a coluna já existir
+        // Garante a criação das colunas caso o arquivo .sqlite antigo persista
+        const colunas = ['avatar', 'banner', 'bio', 'specialties'];
+        colunas.forEach(coluna => {
+            db.run(`ALTER TABLE usuarios ADD COLUMN ${coluna} TEXT`, () => {
+                // Ignora erro se a coluna já existir
+            });
         });
     });
-});
 
     // 2. Criando a tabela de trabalhos (portfólio)
     db.run(`
@@ -70,7 +70,21 @@ function criarTabelas() {
         )
     `);
 
-    console.log('Tabelas de usuários, trabalhos e mensagens prontas para uso!');
+    // 4. Criando a tabela de curtidas
+    db.run(`
+    CREATE TABLE IF NOT EXISTS curtidas (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        usuario_id INTEGER NOT NULL,
+        trabalho_id INTEGER NOT NULL,
+
+        FOREIGN KEY (usuario_id) REFERENCES usuarios (id),
+        FOREIGN KEY (trabalho_id) REFERENCES trabalhos (id),
+
+        UNIQUE(usuario_id, trabalho_id)
+    )
+`);
+
+    console.log('Tabelas de usuários, trabalhos, mensagens e curtidas prontas para uso!');
 }
 
 

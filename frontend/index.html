@@ -1053,6 +1053,396 @@
     .visually-hidden-form {
       display: contents;
     }
+
+    /* =========================================================
+   PERFIL
+   ========================================================= */
+
+.profile-page {
+  width: 100%;
+  min-height: calc(100vh - 60px);
+  padding-bottom: 64px;
+  color: #fff;
+}
+
+.profile-cover {
+  width: 100%;
+  height: 260px;
+  background-image: url("https://images.unsplash.com/photo-1542038784456-1ea8e935640e?q=80&w=2000&auto=format&fit=crop");
+  background-size: cover;
+  background-position: center;
+}
+
+.profile-container {
+  width: min(1180px, calc(100% - 48px));
+  margin: 0 auto;
+}
+
+/* ---------- Cabeçalho ---------- */
+
+.profile-header {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 24px;
+  margin-top: -48px;
+  padding-bottom: 28px;
+}
+
+.profile-identity {
+  display: flex;
+  align-items: flex-end;
+  gap: 20px;
+}
+
+.profile-avatar-large {
+  width: 96px;
+  height: 96px;
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+  border: 5px solid var(--background);
+
+  background: #8b5cf6;
+  color: white;
+
+  font-size: 30px;
+  font-weight: 700;
+}
+
+.profile-main-info {
+  padding-bottom: 5px;
+}
+
+.profile-main-info h1 {
+  margin: 0 0 5px;
+
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.profile-role {
+  margin: 0;
+  color: #a9a9a9;
+  font-size: 14px;
+}
+
+.profile-actions {
+  display: flex;
+  gap: 10px;
+  padding-bottom: 6px;
+}
+
+.profile-action-secondary,
+.profile-action-primary {
+  height: 40px;
+  padding: 0 18px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 8px;
+
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.profile-action-secondary {
+  border: 1px solid #3d3d3d;
+  background: transparent;
+  color: #fff;
+}
+
+.profile-action-secondary:hover {
+  background: #242424;
+  border-color: #555;
+}
+
+.profile-action-primary {
+  border: 1px solid #315eb0;
+  background: #254b94;
+  color: #fff;
+}
+
+.profile-action-primary:hover {
+  background: #2e5cae;
+}
+
+/* ---------- Bio ---------- */
+
+.profile-details {
+  max-width: 700px;
+  margin-top: 4px;
+}
+
+.profile-bio {
+  margin: 0;
+
+  color: #c8c8c8;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+/* ---------- Estatísticas ---------- */
+
+.profile-stats {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+
+  margin-top: 22px;
+}
+
+.profile-stat {
+  display: flex;
+  gap: 6px;
+  align-items: baseline;
+}
+
+.profile-stat strong {
+  font-size: 15px;
+  color: #fff;
+}
+
+.profile-stat span {
+  color: #909090;
+  font-size: 13px;
+}
+
+/* ---------- Abas ---------- */
+
+.profile-tabs {
+  display: flex;
+  gap: 28px;
+
+  margin-top: 30px;
+
+  border-bottom: 1px solid #303030;
+}
+
+.profile-tab {
+  position: relative;
+
+  padding: 0 0 13px;
+
+  border: none;
+  background: none;
+
+  color: #949494;
+
+  font-family: inherit;
+  font-size: 14px;
+
+  cursor: pointer;
+}
+
+.profile-tab:hover {
+  color: #fff;
+}
+
+.profile-tab.active {
+  color: #fff;
+  font-weight: 600;
+}
+
+.profile-tab.active::after {
+  content: "";
+
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+
+  width: 100%;
+  height: 2px;
+
+  background: #315eb0;
+}
+
+.profile-tab-count {
+  margin-left: 4px;
+
+  color: #777;
+  font-size: 12px;
+}
+
+/* ---------- Conteúdo ---------- */
+
+.profile-content {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 280px;
+  gap: 36px;
+
+  padding-top: 28px;
+}
+
+.profile-portfolio {
+  min-width: 0;
+}
+
+#profile-works-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+/* ---------- Sidebar ---------- */
+
+.profile-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.profile-sidebar-section {
+  padding-bottom: 24px;
+  border-bottom: 1px solid #303030;
+}
+
+.profile-sidebar-title {
+  margin: 0 0 14px;
+
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.profile-availability {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  margin-bottom: 10px;
+
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.profile-availability-dot {
+  width: 7px;
+  height: 7px;
+
+  border-radius: 50%;
+  background: #22c55e;
+}
+
+.profile-sidebar-text {
+  margin: 4px 0;
+
+  color: #969696;
+
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.profile-sidebar-text strong {
+  color: #ddd;
+  font-weight: 500;
+}
+
+.profile-budget-btn {
+  width: 100%;
+  height: 38px;
+
+  margin-top: 14px;
+
+  border: 1px solid #3d3d3d;
+  border-radius: 7px;
+
+  background: transparent;
+  color: #fff;
+
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+.profile-budget-btn:hover {
+  background: #242424;
+}
+
+/* ---------- Especialidades ---------- */
+
+.profile-specialties-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.profile-specialty {
+  padding: 6px 10px;
+
+  border: 1px solid #353535;
+  border-radius: 20px;
+
+  background: #222;
+
+  color: #bbb;
+
+  font-size: 11px;
+}
+
+/* ---------- Responsividade ---------- */
+
+@media (max-width: 900px) {
+  .profile-content {
+    grid-template-columns: 1fr;
+  }
+
+  .profile-sidebar {
+    display: none;
+  }
+}
+
+@media (max-width: 700px) {
+  .profile-container {
+    width: min(100% - 28px, 1180px);
+  }
+
+  .profile-cover {
+    height: 190px;
+  }
+
+  .profile-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .profile-identity {
+    align-items: flex-end;
+  }
+
+  .profile-avatar-large {
+    width: 78px;
+    height: 78px;
+    font-size: 24px;
+  }
+
+  .profile-actions {
+    width: 100%;
+  }
+
+  .profile-action-primary,
+  .profile-action-secondary {
+    flex: 1;
+  }
+
+  #profile-works-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
   </style>
 </head>
 
@@ -1109,115 +1499,242 @@
     <div class="masonry" id="explore-feed"></div>
   </main>
 
-  <main id="view-profile" hidden style="width: 100%; padding-bottom: 40px; color: white;">
-    <!-- Banner de Fundo (Foto de capa genérica para o MVP) -->
-    <div id="profile-banner"
-      style="height: 240px; background-image: url('https://images.unsplash.com/photo-1542038784456-1ea8e935640e?q=80&w=2000&auto=format&fit=crop'); background-size: cover; background-position: center; width: 100%; border-radius: 0 0 16px 16px;">
-    </div>
+  <main id="view-profile" class="profile-page" hidden>
 
-    <!-- Container Centralizado -->
-    <div style="max-width: 1200px; margin: 0 auto; padding: 0 40px; position: relative; top: -60px;">
+  <!-- CAPA -->
+  <div id="profile-banner" class="profile-cover"></div>
 
-      <!-- 1. Cabeçalho do Chat (AGORA DINÂMICO) -->
-      <div
-        style="display: flex; justify-content: space-between; align-items: center; padding: 15px 30px; border-bottom: 1px solid #333; background: #181818;">
-        <div style="display: flex; align-items: center; gap: 12px;">
-          <!-- ID adicionado no avatar -->
-          <div id="chat-header-avatar" class="avatar"
-            style="background:#8b5cf6; width:40px; height:40px; font-size:16px; display:flex; align-items:center; justify-content:center; border-radius:50%; font-weight:bold;">
-            A</div>
-          <div>
-            <!-- ID adicionado no nome -->
-            <div id="chat-header-name" style="font-weight: 600; font-size: 16px;">Admin</div>
-            <div style="color: #aaa; font-size: 12px;">Membro do Snap Frame</div>
-          </div>
+  <div class="profile-container">
+
+    <!-- CABEÇALHO -->
+    <section class="profile-header">
+
+      <div class="profile-identity">
+
+        <div
+          id="profile-avatar"
+          class="profile-avatar-large"
+        >
+          A
         </div>
-        <button class="btn-ghost"
-          style="border: 1px solid #444; color: white; padding: 6px 16px; border-radius: 6px; font-size: 13px; cursor: pointer;">Ver
-          perfil</button>
+
+        <div class="profile-main-info">
+
+          <h1 id="profile-name">
+            Admin
+          </h1>
+
+          <p class="profile-role">
+            Membro do Snap Frame
+          </p>
+
+        </div>
+
       </div>
 
-      <div style="display: flex; gap: 12px; padding-bottom: 15px;">
-        <button class="btn-ghost" onclick="document.getElementById('edit-profile-modal').hidden = false"
-          style="border: 1px solid #444; color: white; padding: 10px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; background: transparent;">Editar
-          Perfil</button>
-        <button class="btn-primary"
-          style="padding: 10px 24px; border-radius: 8px; background: #254b94; font-weight: 600; cursor: pointer; border: none; color: white;">Compartilhar</button>
-      </div>
-    </div>
 
-    <!-- Bio e Estatísticas -->
-    <p id="profile-bio" style="color: #ddd; max-width: 650px; font-size: 15px; line-height: 1.6; margin-bottom: 20px;">
-      Ensaios de casal,
-      família e paisagem. Luz natural sempre — de preferência no fim de tarde.</p>
+      <div class="profile-actions">
 
-    <div style="display: flex; gap: 24px; margin-bottom: 30px; font-size: 15px;">
-      <div><strong id="profile-project-count" style="font-size: 16px;">0</strong> <span
-          style="color:#aaa;">projetos</span></div>
-      <div><strong style="font-size: 16px;">2180</strong> <span style="color:#aaa;">seguidores</span></div>
-      <div><strong style="font-size: 16px;">402</strong> <span style="color:#aaa;">seguindo</span></div>
-    </div>
+        <button
+          type="button"
+          class="profile-action-secondary"
+          onclick="document.getElementById('edit-profile-modal').hidden = false"
+        >
+          Editar perfil
+        </button>
 
-    <!-- Abas -->
-    <div style="display: flex; gap: 30px; border-bottom: 1px solid #333; margin-bottom: 25px;">
-      <span style="font-weight: 600; border-bottom: 3px solid #254b94; padding-bottom: 12px; cursor:pointer;">Portfólio
-        <span id="tab-project-count"
-          style="color:#aaa; font-weight:normal; font-size:13px; margin-left:4px;">0</span></span>
-      <span style="color: #aaa; padding-bottom: 12px; cursor:pointer;">Sobre</span>
-      <span style="color: #aaa; padding-bottom: 12px; cursor:pointer;">Curtidos <span
-          style="font-size:13px; margin-left:4px;">4</span></span>
-    </div>
+        <button
+          type="button"
+          class="profile-action-primary"
+        >
+          Compartilhar
+        </button>
 
-    <!-- Layout Duas Colunas (Grid + Sidebar) -->
-    <div style="display: flex; gap: 30px; align-items: flex-start;">
-
-      <!-- Esquerda: Portfólio -->
-      <div id="profile-works-grid"
-        style="flex-grow: 1; display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
-        <!-- Projetos injetados pelo JS -->
       </div>
 
-      <!-- Direita: Sidebar (Cards) -->
-      <aside style="width: 320px; min-width: 320px; display: flex; flex-direction: column; gap: 20px;">
+    </section>
 
-        <!-- Card de Disponibilidade -->
-        <div style="background: #1c1c21; border: 1px solid #2c2c35; border-radius: 12px; padding: 20px;">
-          <div style="display: flex; align-items: center; gap: 8px; font-weight: 600; margin-bottom: 15px;">
-            <div style="width: 8px; height: 8px; background: #22c55e; border-radius: 50%;"></div>
+
+    <!-- BIO -->
+    <section class="profile-details">
+
+      <p
+        id="profile-bio"
+        class="profile-bio"
+      >
+        Ensaios de casal, família e paisagem.
+        Luz natural sempre — de preferência no fim de tarde.
+      </p>
+
+    </section>
+
+
+    <!-- ESTATÍSTICAS -->
+    <section class="profile-stats">
+
+      <div class="profile-stat">
+        <strong id="profile-project-count">
+          0
+        </strong>
+
+        <span>projetos</span>
+      </div>
+
+
+      <div class="profile-stat">
+        <strong>
+          2180
+        </strong>
+
+        <span>seguidores</span>
+      </div>
+
+
+      <div class="profile-stat">
+        <strong>
+          402
+        </strong>
+
+        <span>seguindo</span>
+      </div>
+
+    </section>
+
+
+    <!-- ABAS -->
+    <nav class="profile-tabs">
+
+      <button
+        type="button"
+        class="profile-tab active"
+      >
+        Portfólio
+
+        <span
+          id="tab-project-count"
+          class="profile-tab-count"
+        >
+          0
+        </span>
+      </button>
+
+
+      <button
+        type="button"
+        class="profile-tab"
+      >
+        Sobre
+      </button>
+
+
+      <button
+        type="button"
+        class="profile-tab"
+      >
+        Curtidos
+
+        <span class="profile-tab-count">
+          4
+        </span>
+      </button>
+
+    </nav>
+
+
+    <!-- CONTEÚDO -->
+    <div class="profile-content">
+
+      <!-- PORTFÓLIO -->
+      <section class="profile-portfolio">
+
+        <div id="profile-works-grid">
+          <!-- Trabalhos inseridos pelo JavaScript -->
+        </div>
+
+      </section>
+
+
+      <!-- SIDEBAR -->
+      <aside class="profile-sidebar">
+
+        <!-- DISPONIBILIDADE -->
+        <section class="profile-sidebar-section">
+
+          <div class="profile-availability">
+
+            <span
+              class="profile-availability-dot"
+            ></span>
+
             Disponível para trabalhos
-          </div>
-          <p style="color: #aaa; font-size: 13px; margin: 0 0 8px 0; line-height: 1.5;">Atende em <strong
-              style="color:white;">Fortaleza, Cumbuco e Jericoacoara</strong></p>
-          <p style="color: #aaa; font-size: 13px; margin: 0 0 20px 0;">Responde em <strong style="color:white;">~1
-              h</strong></p>
-          <button class="btn-primary"
-            style="width: 100%; padding: 12px; border-radius: 8px; background: #254b94; font-weight: 600; cursor: pointer; border: none; color: white;">Solicitar
-            orçamento</button>
-        </div>
 
-        <!-- Card de Especialidades -->
-        <div id="profile-specialties" style="display: flex; flex-wrap: wrap; gap: 10px;">
-          <div style="font-weight: 600; margin-bottom: 15px;">Especialidades</div>
-          <div style="display: flex; flex-wrap: wrap; gap: 10px;">
-            <span
-              style="background: rgba(239, 68, 68, 0.2); color: #fca5a5; padding: 6px 12px; border-radius: 6px; font-size: 13px; font-weight: 500;">💑
-              Casal</span>
-            <span
-              style="background: rgba(245, 158, 11, 0.2); color: #fcd34d; padding: 6px 12px; border-radius: 6px; font-size: 13px; font-weight: 500;">👨‍👩‍👧
-              Família</span>
-            <span
-              style="background: rgba(16, 185, 129, 0.2); color: #6ee7b7; padding: 6px 12px; border-radius: 6px; font-size: 13px; font-weight: 500;">🏞️
-              Paisagem</span>
-            <span
-              style="background: rgba(245, 158, 11, 0.2); color: #fcd34d; padding: 6px 12px; border-radius: 6px; font-size: 13px; font-weight: 500;">☀️
-              Luz natural</span>
           </div>
-        </div>
+
+
+          <p class="profile-sidebar-text">
+            Atende em
+            <strong>
+              Fortaleza, Cumbuco e Jericoacoara
+            </strong>
+          </p>
+
+
+          <p class="profile-sidebar-text">
+            Geralmente responde em
+            <strong>~1h</strong>
+          </p>
+
+
+          <button
+            type="button"
+            class="profile-budget-btn"
+          >
+            Solicitar orçamento
+          </button>
+
+        </section>
+
+
+        <!-- ESPECIALIDADES -->
+        <section
+          id="profile-specialties"
+          class="profile-sidebar-section"
+        >
+
+          <h3 class="profile-sidebar-title">
+            Especialidades
+          </h3>
+
+
+          <div class="profile-specialties-list">
+
+            <span class="profile-specialty">
+              Casal
+            </span>
+
+            <span class="profile-specialty">
+              Família
+            </span>
+
+            <span class="profile-specialty">
+              Paisagem
+            </span>
+
+            <span class="profile-specialty">
+              Luz natural
+            </span>
+
+          </div>
+
+        </section>
 
       </aside>
+
     </div>
-    </div>
-  </main>
+
+  </div>
+
+</main>
 
   <!-- Tela de Chat (Com Menu Lateral) -->
   <main id="view-chat" hidden style="display: flex;
@@ -1562,37 +2079,111 @@
       });
 
       async function buscarTrabalhosDoBanco() {
+
         try {
-          // Busca os dados na nossa Recepcionista de Trabalhos
-          const resposta = await fetch('/api/works');
+
+          var usuarioLocal = JSON.parse(
+            localStorage.getItem("snapframe_user")
+          );
+
+          var url = "/api/works";
+
+          if (usuarioLocal && usuarioLocal.id) {
+            url += "?usuario_id=" + usuarioLocal.id;
+          }
+
+          console.log("Buscando trabalhos:", url);
+
+          const resposta = await fetch(url);
+
+          if (!resposta.ok) {
+            throw new Error("Erro ao buscar trabalhos");
+          }
+
           const trabalhosDoBanco = await resposta.json();
 
-          // Converte os dados do banco para o formato que a sua interface já usa
+          console.log(
+            "Trabalhos recebidos do backend:",
+            trabalhosDoBanco
+          );
+
+          // IMPORTANTE:
+          // reconstruímos completamente as curtidas
+          // toda vez que os trabalhos são carregados.
+          likedIds = {};
+
           WORKS = trabalhosDoBanco.map(function (w) {
+
+            var id = String(w.id);
+
+            // SQLite devolve 1 caso o usuário tenha curtido
+            if (Number(w.curtido) === 1) {
+              likedIds[id] = true;
+            }
+
             return {
-              id: w.id.toString(),
+              id: id,
+
               title: w.titulo,
+
               image: w.imagem_url,
-              category_name: w.categoria,
-              state: w.estado,
-              city: w.cidade,
-              like_count: w.likes || 0,
-              owner_id: "user-" + w.usuario_id,
-              owner_display_name: w.owner_display_name,
-              owner_role_name: w.owner_role_name
+
+              category_name:
+                w.categoria || "Fotografia",
+
+              state:
+                w.estado || "",
+
+              city:
+                w.cidade || "",
+
+              like_count:
+                Number(w.likes) || 0,
+
+              owner_id:
+                "user-" + w.usuario_id,
+
+              owner_user_id:
+                w.usuario_id,
+
+              owner_display_name:
+                w.owner_display_name,
+
+              owner_role_name:
+                w.owner_role_name || ""
             };
           });
 
-          // Pede para a tela se desenhar novamente com os dados reais
+          console.log(
+            "Curtidas reconstruídas:",
+            likedIds
+          );
+
+          // Reconstrói o carrossel da Home
           buildHero();
+
+          // Atualiza a rota/tela atual
           route();
 
+          // Reinicia o carregamento da aba Explore
           itensRenderizados = 0;
+
           var feed = document.getElementById("explore-feed");
-          if (feed) feed.innerHTML = ""; // Limpa a tela antes de injetar
+
+          if (feed) {
+            feed.innerHTML = "";
+          }
+
+          // Carrega novamente os trabalhos do Explore
           carregarMaisTrabalhos();
-        } catch (erro) {
-          console.error("Erro ao buscar trabalhos do backend:", erro);
+
+        } catch (error) {
+
+          console.error(
+            "Erro ao carregar trabalhos:",
+            error
+          );
+
         }
       }
 
@@ -1885,8 +2476,87 @@
       function closeLightbox() { document.getElementById("work-lightbox").hidden = true; }
 
       /* ============ like toggle (always gated — no real auth in this demo) ============ */
-      function toggleLike() {
-        openAuthGate("login", "Entre para curtir este trabalho");
+      async function toggleLike(workId) {
+
+        // Verifica se existe usuário logado
+        const usuarioLocal = JSON.parse(
+          localStorage.getItem("snapframe_user")
+        );
+
+        // Se não estiver logado, abre o modal
+        if (!usuarioLocal) {
+          openAuthGate(
+            "login",
+            "Entre para curtir este trabalho"
+          );
+
+          return;
+        }
+
+        try {
+
+          const response = await fetch(
+            '/api/works/' + workId + '/like',
+            {
+              method: 'POST',
+
+              headers: {
+                'Content-Type': 'application/json'
+              },
+
+              body: JSON.stringify({
+                usuario_id: usuarioLocal.id
+              })
+            }
+          );
+
+          const data = await response.json();
+
+          if (!response.ok) {
+            console.error(data);
+            return;
+          }
+
+          // Procura o trabalho dentro da lista local
+          const trabalho = WORKS.find(function (w) {
+            return w.id === workId;
+          });
+
+          if (!trabalho) return;
+
+          // Atualiza o contador local
+          trabalho.like_count = data.likes;
+
+          // Marca como curtido
+          if (data.curtido) {
+            likedIds[workId] = true;
+          }
+
+          // Remove a marcação
+          else {
+            delete likedIds[workId];
+          }
+
+          // Atualiza a tela Explore
+          renderExplore();
+
+          // Se o lightbox estiver aberto,
+          // atualiza ele também
+          const lightbox = document.getElementById(
+            "work-lightbox"
+          );
+
+          if (lightbox && !lightbox.hidden) {
+            openLightbox(workId);
+          }
+
+        } catch (erro) {
+
+          console.error(
+            "Erro ao curtir trabalho:",
+            erro
+          );
+        }
       }
 
       /* ============ sessão do usuário (Maquiagem do Login) ============ */
@@ -1905,8 +2575,7 @@
 
           // Menu Dropdown
           '<div id="user-dropdown" hidden style="position:absolute; top:45px; right:0; background:#222; border:1px solid #333; border-radius:8px; padding:5px 0; min-width:130px; box-shadow:0 4px 15px rgba(0,0,0,0.5); z-index:100; flex-direction:column;">' +
-          '<button type="button" class="btn-ghost" onclick="abrirPerfil(usuarioAlvoId)" style="width:100%; text-align:left; padding:8px 15px; color:#fff; border-radius:0;">Perfil</button>' +
-          '<button type="button" class="btn-ghost" style="width:100%; text-align:left; padding:8px 15px; color:#fff; border-radius:0;">Conta</button>' +
+          '<button type="button" class="btn-ghost" onclick="abrirPerfil()" style="width:100%; text-align:left; padding:8px 15px; color:#fff; border-radius:0;">Perfil</button>' + '<button type="button" class="btn-ghost" style="width:100%; text-align:left; padding:8px 15px; color:#fff; border-radius:0;">Conta</button>' +
           '<button type="button" class="btn-ghost" onclick="sairDaConta()" style="width:100%; text-align:left; padding:8px 15px; color:#ff4444; border-radius:0;">Sair</button>' +
           '</div>' +
           '</div>';
@@ -2349,10 +3018,162 @@
           grid.innerHTML = "<p style='color:#aaa; grid-column: 1 / -1; padding: 20px 0;'>Nenhum projeto publicado ainda.</p>";
         } else {
           grid.innerHTML = meusTrabalhos.map(function (w) {
-            return '<div style="aspect-ratio:3/4; background-image:url(' + w.image + '); background-size:cover; background-position:center; border-radius:12px; cursor:pointer; padding: 12px; display: flex; align-items: flex-start;">' +
-              '<span style="background: rgba(0,0,0,0.65); color: white; padding: 4px 10px; border-radius: 12px; font-size: 10px; font-weight: bold; text-transform: uppercase;">' + w.category_name + '</span>' +
-              '</div>';
+
+            return `
+        <div
+            style="
+                position: relative;
+                aspect-ratio: 3/4;
+                background-image: url('${w.image}');
+                background-size: cover;
+                background-position: center;
+                border-radius: 12px;
+                cursor: pointer;
+                padding: 12px;
+                display: flex;
+                align-items: flex-start;
+            "
+            onclick="openLightbox('${w.id}')"
+        >
+
+            <span
+                style="
+                    background: rgba(0,0,0,0.65);
+                    color: white;
+                    padding: 4px 10px;
+                    border-radius: 12px;
+                    font-size: 10px;
+                    font-weight: bold;
+                    text-transform: uppercase;
+                "
+            >
+                ${w.category_name}
+            </span>
+
+            <button
+                type="button"
+
+                onclick="
+                    event.stopPropagation();
+                    excluirTrabalho('${w.id}');
+                "
+
+                title="Excluir trabalho"
+
+                style="
+                    position: absolute;
+                    top: 10px;
+                    right: 10px;
+
+                    width: 36px;
+                    height: 36px;
+
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+
+                    border: none;
+                    border-radius: 50%;
+
+                    background: rgba(0, 0, 0, 0.7);
+                    color: white;
+
+                    cursor: pointer;
+                    font-size: 17px;
+
+                    transition: 0.2s;
+                "
+            >
+                🗑
+            </button>
+
+        </div>
+    `;
           }).join("");
+        }
+      };
+
+      window.excluirTrabalho = async function (workId) {
+
+        var usuarioLocal = JSON.parse(
+          localStorage.getItem("snapframe_user")
+        );
+
+        if (!usuarioLocal) {
+          return;
+        }
+
+        var confirmar = confirm(
+          "Tem certeza que deseja excluir este trabalho?"
+        );
+
+        if (!confirmar) {
+          return;
+        }
+
+        try {
+
+          const resposta = await fetch(
+            "/api/works/" + workId,
+            {
+              method: "DELETE",
+
+              headers: {
+                "Content-Type": "application/json"
+              },
+
+              body: JSON.stringify({
+                usuario_id: usuarioLocal.id
+              })
+            }
+          );
+
+          const dados = await resposta.json();
+
+          if (!resposta.ok) {
+            alert(
+              dados.erro ||
+              "Não foi possível excluir o trabalho."
+            );
+
+            return;
+          }
+
+          // Remove também do array local
+          WORKS = WORKS.filter(function (w) {
+            return String(w.id) !== String(workId);
+          });
+
+          // Remove eventual estado de like
+          delete likedIds[String(workId)];
+
+          // Atualiza o perfil
+          abrirPerfil();
+
+          // Atualiza outras telas que usam WORKS
+          buildHero();
+
+          itensRenderizados = 0;
+
+          var feed =
+            document.getElementById("explore-feed");
+
+          if (feed) {
+            feed.innerHTML = "";
+          }
+
+          carregarMaisTrabalhos();
+
+        } catch (erro) {
+
+          console.error(
+            "Erro ao excluir trabalho:",
+            erro
+          );
+
+          alert(
+            "Erro ao conectar com o servidor."
+          );
         }
       };
 
