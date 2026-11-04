@@ -1058,391 +1058,418 @@
    PERFIL
    ========================================================= */
 
-.profile-page {
-  width: 100%;
-  min-height: calc(100vh - 60px);
-  padding-bottom: 64px;
-  color: #fff;
-}
-
-.profile-cover {
-  width: 100%;
-  height: 260px;
-  background-image: url("https://images.unsplash.com/photo-1542038784456-1ea8e935640e?q=80&w=2000&auto=format&fit=crop");
-  background-size: cover;
-  background-position: center;
-}
-
-.profile-container {
-  width: min(1180px, calc(100% - 48px));
-  margin: 0 auto;
-}
-
-/* ---------- Cabeçalho ---------- */
-
-.profile-header {
-  position: relative;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  gap: 24px;
-  margin-top: -48px;
-  padding-bottom: 28px;
-}
-
-.profile-identity {
-  display: flex;
-  align-items: flex-end;
-  gap: 20px;
-}
-
-.profile-avatar-large {
-  width: 96px;
-  height: 96px;
-  flex-shrink: 0;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  border-radius: 50%;
-  border: 5px solid var(--background);
-
-  background: #8b5cf6;
-  color: white;
-
-  font-size: 30px;
-  font-weight: 700;
-}
-
-.profile-main-info {
-  padding-bottom: 5px;
-}
-
-.profile-main-info h1 {
-  margin: 0 0 5px;
-
-  font-size: 26px;
-  font-weight: 700;
-  line-height: 1.2;
-}
-
-.profile-role {
-  margin: 0;
-  color: #a9a9a9;
-  font-size: 14px;
-}
-
-.profile-actions {
-  display: flex;
-  gap: 10px;
-  padding-bottom: 6px;
-}
-
-.profile-action-secondary,
-.profile-action-primary {
-  height: 40px;
-  padding: 0 18px;
-
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-
-  border-radius: 8px;
-
-  font-family: inherit;
-  font-size: 13px;
-  font-weight: 600;
-
-  cursor: pointer;
-  transition: 0.2s;
-}
-
-.profile-action-secondary {
-  border: 1px solid #3d3d3d;
-  background: transparent;
-  color: #fff;
-}
+    .profile-page {
+      width: 100%;
+      min-height: calc(100vh - 60px);
+      padding-bottom: 64px;
+      color: #fff;
+    }
+
+    .profile-cover {
+      width: 100%;
+      height: 260px;
+      background-image: url("https://images.unsplash.com/photo-1542038784456-1ea8e935640e?q=80&w=2000&auto=format&fit=crop");
+      background-size: cover;
+      background-position: center;
+    }
+
+    .profile-container {
+      width: min(1180px, calc(100% - 48px));
+      margin: 0 auto;
+    }
+
+    /* ---------- Cabeçalho ---------- */
+
+    .profile-header {
+      position: relative;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 24px;
+      margin-top: -48px;
+      padding-bottom: 28px;
+    }
+
+    .profile-identity {
+      display: flex;
+      align-items: flex-end;
+      gap: 20px;
+    }
+
+    .profile-avatar-large {
+      width: 96px;
+      height: 96px;
+      flex-shrink: 0;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      border-radius: 50%;
+      border: 5px solid var(--background);
+
+      background: #8b5cf6;
+      color: white;
+
+      font-size: 30px;
+      font-weight: 700;
+    }
+
+    .profile-main-info {
+      padding-bottom: 5px;
+    }
+
+    .profile-main-info h1 {
+      margin: 0 0 5px;
+
+      font-size: 26px;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    .profile-role {
+      margin: 0;
+      color: #a9a9a9;
+      font-size: 14px;
+    }
+
+    .profile-actions {
+      display: flex;
+      gap: 10px;
+      padding-bottom: 6px;
+    }
+
+    .profile-action-secondary,
+    .profile-action-primary {
+      height: 40px;
+      padding: 0 18px;
+
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+
+      border-radius: 8px;
+
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 600;
+
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .profile-action-secondary {
+      border: 1px solid #3d3d3d;
+      background: transparent;
+      color: #fff;
+    }
 
-.profile-action-secondary:hover {
-  background: #242424;
-  border-color: #555;
-}
+    .profile-action-secondary:hover {
+      background: #242424;
+      border-color: #555;
+    }
 
-.profile-action-primary {
-  border: 1px solid #315eb0;
-  background: #254b94;
-  color: #fff;
-}
+    .profile-action-primary {
+      border: 1px solid #315eb0;
+      background: #254b94;
+      color: #fff;
+    }
 
-.profile-action-primary:hover {
-  background: #2e5cae;
-}
+    .profile-action-primary:hover {
+      background: #2e5cae;
+    }
 
-/* ---------- Bio ---------- */
+    /* ---------- Bio ---------- */
 
-.profile-details {
-  max-width: 700px;
-  margin-top: 4px;
-}
+    .profile-details {
+      max-width: 700px;
+      margin-top: 4px;
+    }
 
-.profile-bio {
-  margin: 0;
+    .profile-bio {
+      margin: 0;
 
-  color: #c8c8c8;
-  font-size: 14px;
-  line-height: 1.7;
-}
+      color: #c8c8c8;
+      font-size: 14px;
+      line-height: 1.7;
+    }
 
-/* ---------- Estatísticas ---------- */
+    /* ---------- Estatísticas ---------- */
 
-.profile-stats {
-  display: flex;
-  align-items: center;
-  gap: 30px;
+    .profile-stats {
+      display: flex;
+      align-items: center;
+      gap: 30px;
 
-  margin-top: 22px;
-}
+      margin-top: 22px;
+    }
 
-.profile-stat {
-  display: flex;
-  gap: 6px;
-  align-items: baseline;
-}
+    .profile-stat {
+      display: flex;
+      gap: 6px;
+      align-items: baseline;
+    }
 
-.profile-stat strong {
-  font-size: 15px;
-  color: #fff;
-}
+    .profile-stat strong {
+      font-size: 15px;
+      color: #fff;
+    }
 
-.profile-stat span {
-  color: #909090;
-  font-size: 13px;
-}
+    .profile-stat span {
+      color: #909090;
+      font-size: 13px;
+    }
 
-/* ---------- Abas ---------- */
+    /* ---------- Abas ---------- */
 
-.profile-tabs {
-  display: flex;
-  gap: 28px;
+    .profile-tabs {
+      display: flex;
+      gap: 28px;
 
-  margin-top: 30px;
+      margin-top: 30px;
 
-  border-bottom: 1px solid #303030;
-}
+      border-bottom: 1px solid #303030;
+    }
 
-.profile-tab {
-  position: relative;
+    .profile-tab {
+      position: relative;
 
-  padding: 0 0 13px;
+      padding: 0 0 13px;
 
-  border: none;
-  background: none;
+      border: none;
+      background: none;
 
-  color: #949494;
+      color: #949494;
 
-  font-family: inherit;
-  font-size: 14px;
+      font-family: inherit;
+      font-size: 14px;
 
-  cursor: pointer;
-}
+      cursor: pointer;
+    }
 
-.profile-tab:hover {
-  color: #fff;
-}
+    .profile-tab:hover {
+      color: #fff;
+    }
 
-.profile-tab.active {
-  color: #fff;
-  font-weight: 600;
-}
+    .profile-tab.active {
+      color: #fff;
+      font-weight: 600;
+    }
 
-.profile-tab.active::after {
-  content: "";
+    .profile-tab.active::after {
+      content: "";
 
-  position: absolute;
-  bottom: -1px;
-  left: 0;
+      position: absolute;
+      bottom: -1px;
+      left: 0;
 
-  width: 100%;
-  height: 2px;
+      width: 100%;
+      height: 2px;
 
-  background: #315eb0;
-}
+      background: #315eb0;
+    }
 
-.profile-tab-count {
-  margin-left: 4px;
+    .profile-tab-count {
+      margin-left: 4px;
 
-  color: #777;
-  font-size: 12px;
-}
+      color: #777;
+      font-size: 12px;
+    }
 
-/* ---------- Conteúdo ---------- */
+    /* ---------- Conteúdo ---------- */
 
-.profile-content {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 280px;
-  gap: 36px;
+    .profile-content {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 280px;
+      gap: 36px;
 
-  padding-top: 28px;
-}
+      padding-top: 28px;
+    }
 
-.profile-portfolio {
-  min-width: 0;
-}
+    .profile-portfolio {
+      min-width: 0;
+    }
 
-#profile-works-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 16px;
-}
+    #profile-works-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
 
-/* ---------- Sidebar ---------- */
+    /* ---------- Sidebar ---------- */
 
-.profile-sidebar {
-  display: flex;
-  flex-direction: column;
-  gap: 28px;
-}
+    .profile-sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
 
-.profile-sidebar-section {
-  padding-bottom: 24px;
-  border-bottom: 1px solid #303030;
-}
+    .profile-sidebar-section {
+      padding-bottom: 24px;
+      border-bottom: 1px solid #303030;
+    }
 
-.profile-sidebar-title {
-  margin: 0 0 14px;
+    .profile-sidebar-title {
+      margin: 0 0 14px;
 
-  color: #fff;
-  font-size: 14px;
-  font-weight: 600;
-}
+      color: #fff;
+      font-size: 14px;
+      font-weight: 600;
+    }
 
-.profile-availability {
-  display: flex;
-  align-items: center;
-  gap: 8px;
+    .profile-availability {
+      display: flex;
+      align-items: center;
+      gap: 8px;
 
-  margin-bottom: 10px;
+      margin-bottom: 10px;
 
-  font-size: 14px;
-  font-weight: 600;
-}
+      font-size: 14px;
+      font-weight: 600;
+    }
 
-.profile-availability-dot {
-  width: 7px;
-  height: 7px;
+    .profile-availability-dot {
+      width: 7px;
+      height: 7px;
 
-  border-radius: 50%;
-  background: #22c55e;
-}
+      border-radius: 50%;
+      background: #22c55e;
+    }
 
-.profile-sidebar-text {
-  margin: 4px 0;
+    .profile-sidebar-text {
+      margin: 4px 0;
 
-  color: #969696;
+      color: #969696;
 
-  font-size: 12px;
-  line-height: 1.6;
-}
+      font-size: 12px;
+      line-height: 1.6;
+    }
 
-.profile-sidebar-text strong {
-  color: #ddd;
-  font-weight: 500;
-}
+    .profile-sidebar-text strong {
+      color: #ddd;
+      font-weight: 500;
+    }
 
-.profile-budget-btn {
-  width: 100%;
-  height: 38px;
+    .profile-budget-btn {
+      width: 100%;
+      height: 38px;
 
-  margin-top: 14px;
+      margin-top: 14px;
 
-  border: 1px solid #3d3d3d;
-  border-radius: 7px;
+      border: 1px solid #3d3d3d;
+      border-radius: 7px;
 
-  background: transparent;
-  color: #fff;
+      background: transparent;
+      color: #fff;
 
-  font-family: inherit;
-  font-size: 12px;
-  font-weight: 600;
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 600;
 
-  cursor: pointer;
-}
+      cursor: pointer;
+    }
 
-.profile-budget-btn:hover {
-  background: #242424;
-}
+    .profile-budget-btn:hover {
+      background: #242424;
+    }
 
-/* ---------- Especialidades ---------- */
+    /* ---------- Especialidades ---------- */
 
-.profile-specialties-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
+    .profile-specialties-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
 
-.profile-specialty {
-  padding: 6px 10px;
+    .profile-specialty {
+      padding: 6px 10px;
 
-  border: 1px solid #353535;
-  border-radius: 20px;
+      border: 1px solid #353535;
+      border-radius: 20px;
 
-  background: #222;
+      background: #222;
 
-  color: #bbb;
+      color: #bbb;
 
-  font-size: 11px;
-}
+      font-size: 11px;
+    }
 
-/* ---------- Responsividade ---------- */
+    /* ---------- Responsividade ---------- */
 
-@media (max-width: 900px) {
-  .profile-content {
-    grid-template-columns: 1fr;
-  }
+    @media (max-width: 900px) {
+      .profile-content {
+        grid-template-columns: 1fr;
+      }
 
-  .profile-sidebar {
-    display: none;
-  }
-}
+      .profile-sidebar {
+        display: none;
+      }
+    }
 
-@media (max-width: 700px) {
-  .profile-container {
-    width: min(100% - 28px, 1180px);
-  }
+    @media (max-width: 700px) {
+      .profile-container {
+        width: min(100% - 28px, 1180px);
+      }
 
-  .profile-cover {
-    height: 190px;
-  }
+      .profile-cover {
+        height: 190px;
+      }
 
-  .profile-header {
-    align-items: flex-start;
-    flex-direction: column;
-  }
+      .profile-header {
+        align-items: flex-start;
+        flex-direction: column;
+      }
 
-  .profile-identity {
-    align-items: flex-end;
-  }
+      .profile-identity {
+        align-items: flex-end;
+      }
 
-  .profile-avatar-large {
-    width: 78px;
-    height: 78px;
-    font-size: 24px;
-  }
+      .profile-avatar-large {
+        width: 78px;
+        height: 78px;
+        font-size: 24px;
+      }
 
-  .profile-actions {
-    width: 100%;
-  }
+      .profile-actions {
+        width: 100%;
+      }
 
-  .profile-action-primary,
-  .profile-action-secondary {
-    flex: 1;
-  }
+      .profile-action-primary,
+      .profile-action-secondary {
+        flex: 1;
+      }
 
-  #profile-works-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
+      #profile-works-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    .chat-header-btn {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      border: 1px solid #34343e;
+      background: #292a35;
+      color: #ffffff;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: 0.2s ease;
+    }
+
+    .chat-header-btn:hover {
+      background: #254b94;
+      border-color: #4168b3;
+      transform: translateY(-1px);
+    }
+
+    .chat-header-btn:active {
+      transform: scale(0.96);
+    }
   </style>
 </head>
 
@@ -1501,240 +1528,208 @@
 
   <main id="view-profile" class="profile-page" hidden>
 
-  <!-- CAPA -->
-  <div id="profile-banner" class="profile-cover"></div>
+    <!-- CAPA -->
+    <div id="profile-banner" class="profile-cover"></div>
 
-  <div class="profile-container">
+    <div class="profile-container">
 
-    <!-- CABEÇALHO -->
-    <section class="profile-header">
+      <!-- CABEÇALHO -->
+      <section class="profile-header">
 
-      <div class="profile-identity">
+        <div class="profile-identity">
 
-        <div
-          id="profile-avatar"
-          class="profile-avatar-large"
-        >
-          A
+          <div id="profile-avatar" class="profile-avatar-large">
+            A
+          </div>
+
+          <div class="profile-main-info">
+
+            <h1 id="profile-name">
+              Admin
+            </h1>
+
+            <p class="profile-role">
+              Membro do Snap Frame
+            </p>
+
+          </div>
+
         </div>
 
-        <div class="profile-main-info">
 
-          <h1 id="profile-name">
-            Admin
-          </h1>
+        <div class="profile-actions">
 
-          <p class="profile-role">
-            Membro do Snap Frame
-          </p>
+          <button type="button" class="profile-action-secondary"
+            onclick="document.getElementById('edit-profile-modal').hidden = false">
+            Editar perfil
+          </button>
 
-        </div>
+          <button type="button" class="profile-action-primary">
+            Compartilhar
+          </button>
 
-      </div>
-
-
-      <div class="profile-actions">
-
-        <button
-          type="button"
-          class="profile-action-secondary"
-          onclick="document.getElementById('edit-profile-modal').hidden = false"
-        >
-          Editar perfil
-        </button>
-
-        <button
-          type="button"
-          class="profile-action-primary"
-        >
-          Compartilhar
-        </button>
-
-      </div>
-
-    </section>
-
-
-    <!-- BIO -->
-    <section class="profile-details">
-
-      <p
-        id="profile-bio"
-        class="profile-bio"
-      >
-        Ensaios de casal, família e paisagem.
-        Luz natural sempre — de preferência no fim de tarde.
-      </p>
-
-    </section>
-
-
-    <!-- ESTATÍSTICAS -->
-    <section class="profile-stats">
-
-      <div class="profile-stat">
-        <strong id="profile-project-count">
-          0
-        </strong>
-
-        <span>projetos</span>
-      </div>
-
-
-      <div class="profile-stat">
-        <strong>
-          2180
-        </strong>
-
-        <span>seguidores</span>
-      </div>
-
-
-      <div class="profile-stat">
-        <strong>
-          402
-        </strong>
-
-        <span>seguindo</span>
-      </div>
-
-    </section>
-
-
-    <!-- ABAS -->
-    <nav class="profile-tabs">
-
-      <button
-        type="button"
-        class="profile-tab active"
-      >
-        Portfólio
-
-        <span
-          id="tab-project-count"
-          class="profile-tab-count"
-        >
-          0
-        </span>
-      </button>
-
-
-      <button
-        type="button"
-        class="profile-tab"
-      >
-        Sobre
-      </button>
-
-
-      <button
-        type="button"
-        class="profile-tab"
-      >
-        Curtidos
-
-        <span class="profile-tab-count">
-          4
-        </span>
-      </button>
-
-    </nav>
-
-
-    <!-- CONTEÚDO -->
-    <div class="profile-content">
-
-      <!-- PORTFÓLIO -->
-      <section class="profile-portfolio">
-
-        <div id="profile-works-grid">
-          <!-- Trabalhos inseridos pelo JavaScript -->
         </div>
 
       </section>
 
 
-      <!-- SIDEBAR -->
-      <aside class="profile-sidebar">
+      <!-- BIO -->
+      <section class="profile-details">
 
-        <!-- DISPONIBILIDADE -->
-        <section class="profile-sidebar-section">
+        <p id="profile-bio" class="profile-bio">
+          Ensaios de casal, família e paisagem.
+          Luz natural sempre — de preferência no fim de tarde.
+        </p>
 
-          <div class="profile-availability">
+      </section>
 
-            <span
-              class="profile-availability-dot"
-            ></span>
 
-            Disponível para trabalhos
+      <!-- ESTATÍSTICAS -->
+      <section class="profile-stats">
 
+        <div class="profile-stat">
+          <strong id="profile-project-count">
+            0
+          </strong>
+
+          <span>projetos</span>
+        </div>
+
+
+        <div class="profile-stat">
+          <strong>
+            2180
+          </strong>
+
+          <span>seguidores</span>
+        </div>
+
+
+        <div class="profile-stat">
+          <strong>
+            402
+          </strong>
+
+          <span>seguindo</span>
+        </div>
+
+      </section>
+
+
+      <!-- ABAS -->
+      <nav class="profile-tabs">
+
+        <button type="button" class="profile-tab active">
+          Portfólio
+
+          <span id="tab-project-count" class="profile-tab-count">
+            0
+          </span>
+        </button>
+
+
+        <button type="button" class="profile-tab">
+          Sobre
+        </button>
+
+
+        <button type="button" class="profile-tab">
+          Curtidos
+
+          <span class="profile-tab-count">
+            4
+          </span>
+        </button>
+
+      </nav>
+
+
+      <!-- CONTEÚDO -->
+      <div class="profile-content">
+
+        <!-- PORTFÓLIO -->
+        <section class="profile-portfolio">
+
+          <div id="profile-works-grid">
+            <!-- Trabalhos inseridos pelo JavaScript -->
           </div>
-
-
-          <p class="profile-sidebar-text">
-            Atende em
-            <strong>
-              Fortaleza, Cumbuco e Jericoacoara
-            </strong>
-          </p>
-
-
-          <p class="profile-sidebar-text">
-            Geralmente responde em
-            <strong>~1h</strong>
-          </p>
-
-
-          <button
-            type="button"
-            class="profile-budget-btn"
-          >
-            Solicitar orçamento
-          </button>
 
         </section>
 
 
-        <!-- ESPECIALIDADES -->
-        <section
-          id="profile-specialties"
-          class="profile-sidebar-section"
-        >
+        <!-- SIDEBAR -->
+        <aside class="profile-sidebar">
 
-          <h3 class="profile-sidebar-title">
-            Especialidades
-          </h3>
+          <!-- DISPONIBILIDADE -->
+          <section class="profile-sidebar-section">
+
+            <div class="profile-availability">
+
+              <span class="profile-availability-dot"></span>
+
+              Disponível para trabalhos
+
+            </div>
 
 
-          <div class="profile-specialties-list">
+            <p class="profile-sidebar-text">
+              Atende em
+              <strong>
+                Fortaleza, Cumbuco e Jericoacoara
+              </strong>
+            </p>
 
-            <span class="profile-specialty">
-              Casal
-            </span>
 
-            <span class="profile-specialty">
-              Família
-            </span>
+            <p class="profile-sidebar-text">
+              Geralmente responde em
+              <strong>~1h</strong>
+            </p>
 
-            <span class="profile-specialty">
-              Paisagem
-            </span>
 
-            <span class="profile-specialty">
-              Luz natural
-            </span>
+            <button type="button" class="profile-budget-btn">
+              Solicitar orçamento
+            </button>
 
-          </div>
+          </section>
 
-        </section>
 
-      </aside>
+          <!-- ESPECIALIDADES -->
+          <section id="profile-specialties" class="profile-sidebar-section">
+
+            <h3 class="profile-sidebar-title">
+              Especialidades
+            </h3>
+
+
+            <div class="profile-specialties-list">
+
+              <span class="profile-specialty">
+                Casal
+              </span>
+
+              <span class="profile-specialty">
+                Família
+              </span>
+
+              <span class="profile-specialty">
+                Paisagem
+              </span>
+
+              <span class="profile-specialty">
+                Luz natural
+              </span>
+
+            </div>
+
+          </section>
+
+        </aside>
+
+      </div>
 
     </div>
 
-  </div>
-
-</main>
+  </main>
 
   <!-- Tela de Chat (Com Menu Lateral) -->
   <main id="view-chat" hidden style="display: flex;
@@ -1790,17 +1785,18 @@
       <div
         style="display: flex; justify-content: space-between; align-items: center; padding: 15px 30px; border-bottom: 1px solid #333; background: #181818;">
         <div style="display: flex; align-items: center; gap: 12px;">
-          <div class="avatar"
+          <div id="chat-header-avatar" class="avatar"
             style="background:#8b5cf6; width:40px; height:40px; font-size:16px; display:flex; align-items:center; justify-content:center; border-radius:50%; font-weight:bold;">
-            MA</div>
-          <div>
-            <div style="font-weight: 600; font-size: 16px;">Marina Alves</div>
-            <div style="color: #aaa; font-size: 12px;">Fotógrafa · Fortaleza</div>
+            -
+          </div>
+          <div id="chat-header-name" style="font-weight: 600; font-size: 16px;">
+            Selecione uma conversa
           </div>
         </div>
-        <button class="btn-ghost"
-          style="border: 1px solid #444; color: white; padding: 6px 16px; border-radius: 6px; font-size: 13px; cursor: pointer;">Ver
-          perfil</button>
+      </div>
+      <button class="btn-ghost"
+        style="border: 1px solid #444; color: white; padding: 6px 16px; border-radius: 6px; font-size: 13px; cursor: pointer;">Ver
+        perfil</button>
       </div>
 
       <!-- 2. Card de Contexto -->
@@ -2579,6 +2575,44 @@
           '<button type="button" class="btn-ghost" onclick="sairDaConta()" style="width:100%; text-align:left; padding:8px 15px; color:#ff4444; border-radius:0;">Sair</button>' +
           '</div>' +
           '</div>';
+
+        // Organiza o cabeçalho horizontalmente
+        headerRight.style.display = "flex";
+        headerRight.style.alignItems = "center";
+        headerRight.style.gap = "14px";
+
+        // Cria o botão de mensagens
+        const botaoChat = document.createElement("button");
+
+        botaoChat.type = "button";
+        botaoChat.className = "chat-header-btn";
+        botaoChat.title = "Mensagens";
+        botaoChat.setAttribute("aria-label", "Abrir mensagens");
+
+        botaoChat.innerHTML = `
+  <svg width="20" height="20"
+       viewBox="0 0 24 24"
+       fill="none"
+       stroke="currentColor"
+       stroke-width="1.8"
+       stroke-linecap="round"
+       stroke-linejoin="round">
+    <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8
+             8.5 8.5 0 0 1-7.6 4.7
+             8.38 8.38 0 0 1-3.8-.9
+             L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8
+             8.5 8.5 0 0 1 4.7-7.6
+             8.38 8.38 0 0 1 3.8-.9
+             h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+  </svg>
+`;
+
+        botaoChat.addEventListener("click", function () {
+          abrirChat();
+        });
+
+        // Insere o botão antes do dropdown existente
+        headerRight.prepend(botaoChat);
       }
 
       window.toggleUserDropdown = function () {
@@ -2833,7 +2867,10 @@
           renderExplore();
           return;
         }
-        if (r.path === "inbox") { showView("inbox"); return; }
+        if (r.path === "inbox") {
+          abrirChat();
+          return;
+        }
         showView("home");
       }
 
@@ -2852,14 +2889,45 @@
           toggleLike(el.getAttribute("data-work"));
         }
         else if (action === "send-message") {
-          // Verifica se o usuário está logado
-          if (localStorage.getItem("snapframe_user")) {
-            closeLightbox(); // Esconde a foto
-            abrirChat();     // Abre a tela de chat
-          } else {
-            var name = el.getAttribute("data-name");
-            openAuthGate("login", "Entre para falar com " + name);
+          const usuarioLocal = JSON.parse(
+            localStorage.getItem("snapframe_user") || "null"
+          );
+
+          if (!usuarioLocal) {
+            const nome = el.getAttribute("data-name");
+            openAuthGate("login", "Entre para falar com " + nome);
+            return;
           }
+
+          const trabalhoId = el.getAttribute("data-work");
+
+          const trabalho = WORKS.find(
+            w => String(w.id) === String(trabalhoId)
+          );
+
+          if (!trabalho) {
+            alert("Trabalho não encontrado.");
+            return;
+          }
+
+          const autorId = Number(
+            trabalho.owner_user_id ||
+            String(trabalho.owner_id).replace("user-", "")
+          );
+
+          if (!Number.isSafeInteger(autorId) || autorId <= 0) {
+            alert("Não foi possível identificar o autor.");
+            return;
+          }
+
+          if (autorId === Number(usuarioLocal.id)) {
+            alert("Você não pode enviar mensagens para si mesmo.");
+            return;
+          }
+
+          closeLightbox();
+
+          abrirChat(autorId, trabalho.owner_display_name);
         }
         else if (action === "follow") {
           var fname = el.getAttribute("data-name");
@@ -2906,6 +2974,12 @@
 
         // Mostra a aba de chat
         document.getElementById('view-chat').hidden = false;
+        document.querySelectorAll(".main-nav a[data-nav]").forEach(function (a) {
+          a.classList.toggle(
+            "active",
+            a.getAttribute("data-nav") === "inbox"
+          );
+        });
       };
 
       /* ============ Tela de Perfil ============ */
@@ -3191,38 +3265,6 @@
         }
       };
 
-      window.enviarMensagemChat = async function () {
-        const input = document.getElementById("chat-input");
-        const conteudo = input.value.trim();
-        const usuarioLocal = JSON.parse(localStorage.getItem("snapframe_user"));
-
-        if (!conteudo || !usuarioLocal || !contatoAtivoId) {
-          if (!contatoAtivoId) alert("Selecione um contato para conversar.");
-          return;
-        }
-
-        try {
-          const resposta = await fetch('/api/messages', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              remetente_id: usuarioLocal.id,
-              destinatario_id: contatoAtivoId,
-              conteudo: conteudo
-            })
-          });
-
-          if (!resposta.ok) throw new Error("Erro ao enviar");
-
-          input.value = "";
-          // Recarrega o histórico atualizado
-          await recarregarChat(contatoAtivoId);
-
-        } catch (erro) {
-          console.error("Erro ao enviar mensagem:", erro);
-          alert("Não foi possível enviar a mensagem.");
-        }
-      };
 
       // ==========================================
       // CONTROLE DE ESTADO DO CHAT (DEFINITIVO)
@@ -3241,7 +3283,11 @@
         document.querySelectorAll('main').forEach(m => m.hidden = true);
         document.getElementById('view-chat').hidden = false;
 
-        await carregarHistoricoEContatos(usuarioLocal.id, destinatarioId, destinatarioNome);
+        await carregarHistoricoEContatos(
+          Number(usuarioLocal.id),
+          destinatarioId ? Number(destinatarioId) : null,
+          destinatarioNome
+        );
       };
 
       async function carregarHistoricoEContatos(usuarioId, destinatarioInicialId, destinatarioNome) {
@@ -3253,8 +3299,11 @@
 
           // Mapeia históricos reais
           todasAsMensagens.forEach(m => {
-            const eRemetente = m.remetente_id === usuarioId;
-            const outroId = eRemetente ? m.destinatario_id : m.remetente_id;
+            const eRemetente = Number(m.remetente_id) === Number(usuarioId);
+
+            const outroId = Number(
+              eRemetente ? m.destinatario_id : m.remetente_id
+            );
             const outroNome = eRemetente ? m.destinatario_nome : m.remetente_nome;
 
             contatosMap.set(outroId, {
@@ -3265,17 +3314,33 @@
           });
 
           // Se iniciou chat com alguém novo, adiciona na lista
-          if (destinatarioInicialId && destinatarioInicialId !== usuarioId && !contatosMap.has(destinatarioInicialId)) {
-            contatosMap.set(destinatarioInicialId, {
-              id: destinatarioInicialId,
+          const novoContatoId = Number(destinatarioInicialId);
+
+          if (
+            Number.isSafeInteger(novoContatoId) &&
+            novoContatoId > 0 &&
+            novoContatoId !== Number(usuarioId) &&
+            !contatosMap.has(novoContatoId)
+          ) {
+            contatosMap.set(novoContatoId, {
+              id: novoContatoId,
               nome: destinatarioNome || "Contato",
               ultimaMensagem: "Inicie a conversa..."
             });
           }
 
           const contatos = Array.from(contatosMap.values());
-          const proximoAtivo = destinatarioInicialId || (contatos.length > 0 ? contatos[0].id : null);
-          const proximoNome = destinatarioNome || (contatos.length > 0 ? contatos[0].nome : "Contato");
+          const proximoAtivo = destinatarioInicialId
+            ? Number(destinatarioInicialId)
+            : (contatos.length > 0 ? Number(contatos[0].id) : null);
+          const contatoEscolhido = contatos.find(
+            c => Number(c.id) === Number(proximoAtivo)
+          );
+
+          const proximoNome =
+            contatoEscolhido?.nome ||
+            destinatarioNome ||
+            "Contato";
 
           renderizarBarraLateral(contatos, usuarioId, proximoAtivo);
 
@@ -3319,33 +3384,80 @@
       }
 
       // ESTA FUNÇÃO ALTERA O NOME LÁ EM CIMA E PREVINE SOBREPOSIÇÃO
+
       window.selecionarContato = function (contatoId, contatoNome) {
-        contatoAtivoId = contatoId;
-        contatoAtivoNome = contatoNome || "Usuário";
-        const usuarioLocal = JSON.parse(localStorage.getItem("snapframe_user"));
+        const usuarioLocal = JSON.parse(
+          localStorage.getItem("snapframe_user") || "null"
+        );
 
-        // Atualiza visualmente o Cabeçalho (Header) do Chat
-        const headerNameEl = document.getElementById("chat-header-name");
-        const headerAvatarEl = document.getElementById("chat-header-avatar");
-        if (headerNameEl) headerNameEl.textContent = contatoAtivoNome;
-        if (headerAvatarEl) headerAvatarEl.textContent = contatoAtivoNome.charAt(0).toUpperCase();
+        if (!usuarioLocal) return;
 
-        // Atualiza as bordas da barra lateral
-        const contatosMap = new Map();
-        todasAsMensagens.forEach(m => {
-          const eRemetente = m.remetente_id === usuarioLocal.id;
-          const outroId = eRemetente ? m.destinatario_id : m.remetente_id;
-          const outroNome = eRemetente ? m.destinatario_nome : m.remetente_nome;
-          contatosMap.set(outroId, { id: outroId, nome: outroNome, ultimaMensagem: m.conteudo });
-        });
+        const meuId = Number(usuarioLocal.id);
+        contatoId = Number(contatoId);
 
-        if (contatoId && !contatosMap.has(contatoId)) {
-          contatosMap.set(contatoId, { id: contatoId, nome: contatoNome, ultimaMensagem: "Inicie a conversa..." });
+        if (!Number.isSafeInteger(contatoId) || contatoId <= 0) {
+          return;
         }
 
-        renderizarBarraLateral(Array.from(contatosMap.values()), usuarioLocal.id, contatoId);
+        // Identifica corretamente os participantes
+        const contatosMap = new Map();
+
+        todasAsMensagens.forEach(m => {
+          const eRemetente = Number(m.remetente_id) === meuId;
+
+          const outroId = Number(
+            eRemetente ? m.destinatario_id : m.remetente_id
+          );
+
+          const outroNome = eRemetente
+            ? m.destinatario_nome
+            : m.remetente_nome;
+
+          contatosMap.set(outroId, {
+            id: outroId,
+            nome: outroNome || "Usuário",
+            ultimaMensagem: m.conteudo
+          });
+        });
+
+        // Recupera o nome correspondente ao contato selecionado
+        const contato = contatosMap.get(contatoId);
+
+        contatoAtivoId = contatoId;
+        contatoAtivoNome = contato?.nome || contatoNome || "Contato";
+
+        if (!contato) {
+          contatosMap.set(contatoId, {
+            id: contatoId,
+            nome: contatoAtivoNome,
+            ultimaMensagem: "Inicie a conversa..."
+          });
+        }
+
+        // Atualiza nome e avatar do cabeçalho
+        const headerNome = document.getElementById("chat-header-name");
+        const headerAvatar = document.getElementById("chat-header-avatar");
+
+        if (headerNome) {
+          headerNome.textContent = contatoAtivoNome;
+        }
+
+        if (headerAvatar) {
+          headerAvatar.textContent =
+            contatoAtivoNome.charAt(0).toUpperCase();
+        }
+
+        // Atualiza a lista de conversas
+        renderizarBarraLateral(
+          Array.from(contatosMap.values()),
+          meuId,
+          contatoId
+        );
+
+        // Carrega as mensagens da conversa selecionada
         recarregarChat(contatoId);
       };
+
 
       async function recarregarChat(contatoId) {
         const usuarioLocal = JSON.parse(localStorage.getItem("snapframe_user"));
@@ -3360,9 +3472,14 @@
           todasAsMensagens = await res.json();
         } catch (e) { }
 
-        const msgsContato = todasAsMensagens.filter(
-          m => (m.remetente_id === usuarioLocal.id && m.destinatario_id === contatoId) ||
-            (m.remetente_id === contatoId && m.destinatario_id === usuarioLocal.id)
+        const meuId = Number(usuarioLocal.id);
+        const idContato = Number(contatoId);
+
+        const msgsContato = todasAsMensagens.filter(m =>
+          (Number(m.remetente_id) === meuId &&
+            Number(m.destinatario_id) === idContato) ||
+          (Number(m.remetente_id) === idContato &&
+            Number(m.destinatario_id) === meuId)
         );
 
         if (msgsContato.length === 0) {
@@ -3371,7 +3488,7 @@
         }
 
         containerMsgs.innerHTML = msgsContato.map(m => {
-          const eMeu = m.remetente_id === usuarioLocal.id;
+          const eMeu = Number(m.remetente_id) === meuId;
           const hora = m.data_envio ? new Date(m.data_envio).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : "Agora";
 
           return `
@@ -3387,56 +3504,79 @@
         containerMsgs.scrollTop = containerMsgs.scrollHeight;
       }
 
+
+      let enviandoMensagem = false;
+
       window.enviarMensagemChat = async function () {
         const input = document.getElementById("chat-input");
+        if (!input) return;
+
         const conteudo = input.value.trim();
-        const usuarioLocal = JSON.parse(localStorage.getItem("snapframe_user"));
 
-        if (!conteudo || !usuarioLocal || !contatoAtivoId) return;
+        const usuarioLocal = JSON.parse(
+          localStorage.getItem("snapframe_user") || "null"
+        );
 
-        const containerMsgs = document.getElementById("chat-messages");
-        if (containerMsgs.innerHTML.includes("Inicie a conversa")) containerMsgs.innerHTML = "";
+        // Verifica se existe mensagem e usuário logado
+        if (!conteudo || !usuarioLocal || enviandoMensagem) {
+          return;
+        }
 
-        const horaAtual = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-        const balaoHtml = `
-    <div style="align-self: flex-end; max-width: 70%; margin-top: 15px;">
-      <div style="background: #254b94; padding: 12px 16px; border-radius: 12px 12px 0 12px; font-size: 14px; line-height: 1.5; color: white;">
-        ${conteudo}
-      </div>
-      <div style="font-size: 10px; color: #777; margin-top: 5px; text-align: right;">${horaAtual}</div>
-    </div>
-  `;
-        containerMsgs.insertAdjacentHTML('beforeend', balaoHtml);
-        containerMsgs.scrollTop = containerMsgs.scrollHeight;
-        input.value = "";
+        // Verifica se existe um destinatário selecionado
+        if (!contatoAtivoId) {
+          alert("Selecione um contato para conversar.");
+          return;
+        }
+
+        const destinatarioId = Number(contatoAtivoId);
+        const destinatarioNome = contatoAtivoNome;
+
+        // Impede envios simultâneos
+        enviandoMensagem = true;
 
         try {
-          await fetch('/api/messages', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+          const resposta = await fetch("/api/messages", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
             body: JSON.stringify({
-              remetente_id: usuarioLocal.id,
-              destinatario_id: contatoAtivoId,
+              remetente_id: Number(usuarioLocal.id),
+              destinatario_id: destinatarioId,
               conteudo: conteudo
             })
           });
-          carregarHistoricoEContatos(usuarioLocal.id, contatoAtivoId, contatoAtivoNome);
-        } catch (erro) { }
+
+          // Verifica se o servidor confirmou o envio
+          if (!resposta.ok) {
+            throw new Error("Falha ao enviar mensagem.");
+          }
+
+          // Limpa o campo somente após o envio bem-sucedido
+          if (input.value.trim() === conteudo) {
+            input.value = "";
+          }
+
+          // Atualiza o histórico e a lista de conversas
+          await carregarHistoricoEContatos(
+            Number(usuarioLocal.id),
+            destinatarioId,
+            destinatarioNome
+          );
+
+        } catch (erro) {
+          console.error("Erro ao enviar mensagem:", erro);
+
+          alert(
+            "Não foi possível concluir a operação. Verifique a conexão e tente novamente."
+          );
+
+        } finally {
+          // Libera o envio de novas mensagens
+          enviandoMensagem = false;
+        }
       };
 
-      const chatInputEl = document.getElementById("chat-input");
-      if (chatInputEl) {
-        chatInputEl.addEventListener("keypress", function (e) {
-          if (e.key === "Enter") enviarMensagemChat();
-        });
-      }
-
-      // Permite enviar apertando a tecla "Enter"
-      document.getElementById("chat-input").addEventListener("keypress", function (e) {
-        if (e.key === "Enter") {
-          enviarMensagemChat();
-        }
-      });
 
       /* ============ init ============ */
       buscarTrabalhosDoBanco();
